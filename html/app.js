@@ -57,10 +57,9 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
                   if(responseObject.userType == 'agent'){
                     window.location.replace("./agent/register.html");
                   } else if (responseObject.userType == 'admin'){
-
                     window.location.replace("./admin/verify.html");
-                } else if (responseObject.userType == 'principle'){
-
+                } else if (responseObject.userType == 'principal'){
+                  window.location.replace("./principal/verify.html");
                 }else{
                     console.error("error usertype not exist");
                 }
