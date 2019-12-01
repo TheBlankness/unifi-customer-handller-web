@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="unifi">
+  <meta name="author" content="">
+
+  <link rel="icon" href="img/head.png">
+  <title>Unifi Agent</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom fonts for this template -->
+  <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+  <link href="../vendor/simple-line-icons/css/simple-line-icons.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+
+  <!-- Custom styles for this template -->
+  <link href="../css/landing-page.css" rel="stylesheet">
+
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg " id="boren">
+      <div class="container">
+        <a class="navbar-brand" href="#">
+        <h4 class="hitam">UNIFI AGENT</h4>        
+        </a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample07" aria-controls="navbarsExample07"
+         aria-expanded="false" aria-label="Toggle navigation" >
+            <span class="icon-menu "></span>
+          </button>
+
+          <div class="navbar-collapse collapse" id="navbarsExample07" >
+              <ul class="navbar navbar-nav navbar-right ml-auto">
+                <li class="nav-item">
+                  <a class="nav-link navi" href="verify.html">VERIFY</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link navi"  href="thumbprint.html">THUMBPRINT</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link navi "  href="order.html">ORDER</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link navi"  href="installation.html">INSTALLATION</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link " id="pilih" href="#">PRINCIPAL</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link navi" style="border-radius: 10px;" onclick="logout()" href="#"><i class="fas fa-sign-out-alt"></i></a>
+                  </li>
+              </ul>
+            </div>
+    </nav>
+
+    <section id="tabs" class="project-tab">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <nav>
+                        <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                            <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">User</a>
+                            <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Report</a>
+                        </div>
+                    </nav>
+                    <div class="tab-content" id="nav-tabContent">
+                        <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                          <br>
+                          <div class="container text-center">
+                            <button type="button" class="btn btn-lg add_user_button" data-toggle="modal" data-target="#create_user" ">
+                              <i class="fas fa-user-plus" style="margin-right: 8px;"></i> 
+                              Add User</button>
+                              <div class="modal fade" id="create_user" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                  <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                      <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                          <span aria-hidden="true">&times;</span>
+                                        </button>
+                                      </div>
+                                      <div class="modal-body text-left">
+                                        <div class="form-row">
+                                            <div class="form-group col-md-12">
+                                              <label for="name">Full name</label>
+                                              <input type="text" class="form-control" id="name">
+                                            </div>
+                                            <div class="form-group col-md-12">
+                                              <label for="ic">Phone number</label>
+                                              <input type="text" class="form-control" id="ic" >
+                                            </div>
+                                          </div>
+                                          <div class="form-row">
+                                            <div class="form-group col-md-12">
+                                              <label for="name">email</label>
+                                              <input type="email" class="form-control" id="email" >
+                                            </div>
+                                            <div class="form-group col-md-12">
+                                              <label for="ic">password</label>
+                                              <input type="text" class="form-control" id="phone">
+                                            </div>
+                                            <div class="form-group col-md-12">
+                                                <label for="ic">confirm password</label>
+                                                <input type="text" class="form-control" id="phone">
+                                              </div>
+                                          <div class="form-group col-md-12">
+                                              <label for="state">Role</label>
+                                              <select id="package" class="form-control" >
+                                                  <option disabled selected value> -- select -- </option>
+                                                <option>Agent</option>
+                                                <option >Admin</option>
+                                              </select>
+                                            </div>
+                                    </div>
+                                      <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">cancel</button>
+                                        <button id="saveButton" type="submit"  class="btn btn-success">Create</button>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                          </div><br><br>
+                            <h2 class="text-center">Admin</h2><br>
+                            <table class="table" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Phone number</th>
+                                        <th>email</th>
+                                        <th></th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Doe</td>
+                                        <td>john@example.com</td>
+                                        <td>john@example.com</td>
+                                        <td  style="padding: 0;"> <button class="" id="next">  <i class="fas fa-edit"></i> </button> </td>        
+                                        <td  style="padding: 0;"> <button class="" id="purge">  <i class="fas fa-trash"></i> </button> </td>        
+                                    </tr>
+                                    <tr>
+                                      <td>mary@example.com</td>
+                                      <td>mary@example.com</td>
+                                      <td>john@example.com</td>
+                                      <td  style="padding: 0;"> <button class="" id="next">  <i class="fas fa-edit"></i> </button> </td>        
+                                      <td  style="padding: 0;"> <button class="" id="purge">  <i class="fas fa-trash"></i> </button> </td>   
+                                    </tr>
+                                    <tr>
+                                        <td>Dooley</td>
+                                        <td>july@example.com</td>
+                                        <td>john@example.com</td>
+                                        <td  style="padding: 0;"> <button class="" id="next">  <i class="fas fa-edit"></i> </button> </td>        
+                                        <td  style="padding: 0;"> <button class="" id="purge">  <i class="fas fa-trash"></i> </button> </td>   
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <br>
+                            <h2 class="text-center">Agent</h2><br>
+
+                            <table class="table" cellspacing="0">
+                              <thead>
+                                  <tr>
+                                      <th>Full Name</th>
+                                      <th>Phone number</th>
+                                      <th>email</th>
+                                      <th></th>
+                                      <th></th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+                                  <tr>
+                                      <td>Doe</td>
+                                      <td>john@example.com</td>
+                                      <td>john@example.com</td>
+                                      <td  style="padding: 0;"> <button class="" id="next">  <i class="fas fa-edit"></i> </button> </td>        
+                                      <td  style="padding: 0;"> <button class="" id="purge">  <i class="fas fa-trash"></i> </button> </td>        
+                                  </tr>
+                                  <tr>
+                                    <td>mary@example.com</td>
+                                    <td>mary@example.com</td>
+                                    <td>john@example.com</td>
+                                    <td  style="padding: 0;"> <button class="" id="next">  <i class="fas fa-edit"></i> </button> </td>        
+                                    <td  style="padding: 0;"> <button class="" id="purge">  <i class="fas fa-trash"></i> </button> </td>   
+                                  </tr>
+                                  <tr>
+                                      <td>Dooley</td>
+                                      <td>july@example.com</td>
+                                      <td>john@example.com</td>
+                                      <td  style="padding: 0;"> <button class="" id="next">  <i class="fas fa-edit"></i> </button> </td>        
+                                      <td  style="padding: 0;"> <button class="" id="purge">  <i class="fas fa-trash"></i> </button> </td>   
+                                  </tr>
+                              </tbody>
+                          </table>
+                        </div>
+                        </div>
+                        <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                          <br>
+                          <div class="card" style="width: 34rem;  float: left;">
+                              <div class="card-body " >
+                                <h5  class="card-title text-center">Daily Report</h5>
+                                <hr>
+                                <table class="summary_principal">
+                                      <tr>
+                                        <td>Sales </td>
+                                        <td>RM560</td>
+                                      </tr>
+                                      <tr>
+                                        <td>Active agent</td>
+                                        <td>3</td>
+                                      </tr>
+                                      <tr>
+                                          <td>order</td>
+                                          <td>6</td>
+                                        </tr>
+                                      <tr>
+                                          <td>order processed </td>
+                                          <td>5</td>
+                                        </tr>
+                                        <tr>
+                                            <td>order completed </td>
+                                            <td>1</td>
+                                          </tr>
+                                </table>
+                              </div>
+                          </div>
+                          <div class="card" style="width: 34rem;  float: right;">
+                              <div class="card-body " >
+                                <h5  class="card-title text-center">Monthly Report</h5>
+                                <hr>
+                                <table class="summary_principal">
+                                      <tr>
+                                        <td>Sales </td>
+                                        <td>RM560</td>
+                                      </tr>
+                                      <tr>
+                                        <td>Active agent</td>
+                                        <td>3</td>
+                                      </tr>
+                                      <tr>
+                                          <td>order</td>
+                                          <td>6</td>
+                                        </tr>
+                                      <tr>
+                                          <td>order processed </td>
+                                          <td>5</td>
+                                        </tr>
+                                        <tr>
+                                            <td>order completed </td>
+                                            <td>1</td>
+                                          </tr>
+                                </table>
+                              </div>
+                          </div>
+                          <br>
+                          <section style="clear:both">
+                            <br><h2 class="text-center"> </h2><br>
+                            <table class="table ">
+                                <thead>
+                                <tr>
+                                  <th scope="col">#</th>
+                                  <th scope="col">Date</th>
+                                  <th scope="col">Order</th>
+                                  <th scope="col">order processed</th>
+                                  <th scope="col">order completed</th>
+                                  <th scope="col">Active agent</th>
+                                  <th scope="col">Sale</th>
+                                </tr>
+                              </thead>
+                            <tbody>
+                              <tr>
+                                <td>1</td>        
+                                <td>Cyka al-blyat</td>
+                                <td>548785145402</td>
+                                <td>cykablyat@nahui.com</td>
+                                <td>658798451</td>        
+                                <td>3, 57th street</td>
+                                <td>eastern gulag</td>
+                              </tr>
+                              <tr>
+                                <td>1</td>        
+                                <td>Mark</td>
+                                <td>Otto</td>
+                                <td>@mdo</td>
+                                <td>1</td>        
+                                <td>Mark</td>
+                                <td>Otto</td>
+                              </tr>
+                              <tr>
+                                <td>1</td>        
+                                <td>Mark</td>
+                                <td>Otto</td>
+                                <td>@mdo</td>
+                                <td>1</td>        
+                                <td>Mark</td>
+                                <td>Otto</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                          </section>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+  <!-- Bootstrap core JavaScript -->
+  <script src="../vendor/jquery/jquery.min.js"></script>
+  <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script>
+    function openTab(evt, cityName) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+    tablinks[i].className = tablinks[i].className.replace(" btn-warning", "");
+  }
+  document.getElementById(cityName).style.display = "flex";
+  evt.currentTarget.className += " active btn-warning";
+
+}
+
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="unifi">
+  <meta name="author" content="">
+
+  
+  <title>Unifi Agent</title>
+
+ <!-- Firebase SDK -->
+ <script src="https://www.gstatic.com/firebasejs/7.4.0/firebase-app.js"></script>
+ <script src="https://www.gstatic.com/firebasejs/6.1.1/firebase-auth.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom fonts for this template -->
+  <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+  <link href="../vendor/simple-line-icons/css/simple-line-icons.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+
+  <!-- Custom styles for this template -->
+  <link href="../css/landing-page.css" rel="stylesheet">
+
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+
+<style>
+ #messages{
+   background-color: rgb(255, 232, 232);
+   border: 1px solid red;
+   color: red;
+   display: none;
+   font-size: 12px;
+   font-weight: bold;
+   margin-bottom: 10px;
+   padding: 10px 25px;
+   max-width: 250px;
+ }
+</style>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg " id="boren">
+      <div class="container">
+        <a class="navbar-brand" href="#">
+        <h4 class="hitam">UNIFI AGENT</h4>
+        </a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample07" aria-controls="navbarsExample07"
+         aria-expanded="false" aria-label="Toggle navigation" >
+            <span class="icon-menu "></span>
+          </button>
+
+          <div class="navbar-collapse collapse" id="navbarsExample07" >
+              <ul class="navbar navbar-nav navbar-right ml-auto">
+                <li class="nav-item ">
+                  <a class="nav-link " id="pilih" href="#" >REGISTER </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link navi"  href="verify.html">VERIFY</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link navi"  href="processing.html">PROCESSING</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link navi"  href="profile.html">PROFILE</a>
+                      </li>
+                  <li class="nav-item">
+                    <a class="nav-link navi" style="border-radius: 10px;" onclick="logout()" href="#"><i class="fas fa-sign-out-alt"></i></a>
+                  </li>
+            </div>
+      </div>
+    </nav>
+
+  <section class="container">
+    <br>
+    <h2 class="text-center">Fill Registration Form</h2>
+          <div class="form-row">
+            <div class="form-group col-md-9">
+              <label for="name">Name</label>
+              <input type="text" class="form-control" id="name">
+            </div>
+            <div class="form-group col-md-3">
+              <label for="ic">IC number</label>
+              <input type="text" class="form-control" id="ic" >
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="name">Email address</label>
+              <input type="email" class="form-control" id="email" >
+            </div>
+            <div class="form-group col-md-6">
+              <label for="ic">Phone number</label>
+              <input type="text" class="form-control" id="phone">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="address1">Address Line 1</label>
+            <input type="text" class="form-control" id="address1" >
+          </div>
+          <div class="form-group">
+            <label for="address2">Address Line 2</label>
+            <input type="text" class="form-control" id="address2" >
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="city">City</label>
+              <input type="text" class="form-control" id="city">
+            </div>
+            <div class="form-group col-md-4">
+              <label for="state">State</label>
+              <select id="state" class="form-control">
+                  <option disabled selected value> -- select -- </option>
+                <option value="Kuala Lumpur">Kuala Lumpur</option>
+                <option value="Johor">Johor</option>
+                <option value="Melaka">Melaka</option>
+                <option value="Negeri Sembilan">Negeri Sembilan</option>
+                <option value="Pahang">Pahang</option>
+                <option value="Selangor">Selangor</option>
+                <option value="Kelantan">Kelantan</option>
+                <option value="Terengganu">Terengganu</option>
+                <option value="Perak">Perak</option>
+                <option value="Kedah">Kedah</option>
+                <option value="Pulau Pinang">Pulau Pinang</option>
+                <option value="Perlis">Perlis</option>
+              </select>
+            </div>
+            <div class="form-group col-md-2">
+              <label for="zip">ZipCode</label>
+              <input type="text" class="form-control" id="zip">
+            </div>
+          </div>
+          <div class="form-group col-md-13">
+              <label for="state">Package</label>
+              <select id="package" class="form-control" >
+                  <option disabled selected value> -- select -- </option>
+                  <option value="89">Unifi Home: RM89/month</option>
+                  <option value="99">Unifi Home: RM99/month</option>
+                  <option value="129">Unifi Home: RM129/month</option>
+                  <option value="159">Unifi Home: RM159/month</option>
+                  <option value="199">Unifi Home: RM199/month</option>
+                  <option value="139">Unifi Biz: RM139/month</option>
+                  <option value="249">Unifi Biz: RM249/month</option>
+                  <option value="349">Unifi Biz: RM349/month</option>
+              </select>
+            </div>
+            <ul id="messages"> 
+            
+            </ul>
+          <button id="submitButton" type="button"  class="btn btn-warning">Register</button>
+  </section>
+  <!-- Bootstrap core JavaScript -->
+  <script>
+    var firebaseConfig = {
+    apiKey: "AIzaSyBV9rQNhxkKV6a62CDgKU2IiatGxV_572Q",
+    authDomain: "unifi-customer-handler.firebaseapp.com",
+    databaseURL: "https://unifi-customer-handler.firebaseio.com",
+    projectId: "unifi-customer-handler",
+    storageBucket: "unifi-customer-handler.appspot.com",
+    messagingSenderId: "126635632868",
+    appId: "1:126635632868:web:d2c7f9bc8b699759f124f1",
+    measurementId: "G-7PE19PG761"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+
+function logout(){
+  firebase.auth().signOut();
+}
+
+let token="";
+
+firebase.auth().onAuthStateChanged(firebaseUser => {
+   
+   if(firebaseUser){
+  
+   }else{
+      window.location.replace("../index.html");
+   }
+})
+
+    const form = {
+      name: document.getElementById('name'),
+      ic: document.getElementById('ic'),
+      email: document.getElementById('email'),
+      phone: document.getElementById('phone'),
+      address1: document.getElementById('address1'),
+      address2: document.getElementById('address2'),
+      city: document.getElementById('city'),
+      state: document.getElementById('state'),
+      zip: document.getElementById('zip'),
+      package: document.getElementById('package'),
+      submitButton: document.getElementById('submitButton'),
+      messages: document.getElementById('messages'),
+    };
+
+    form.submitButton.addEventListener("click", () => {
+      form.submitButton.disabled = true;
+   
+      const request = new XMLHttpRequest();
+
+
+      request.onload = () => {
+        let responseObject = null;
+        try{
+          responseObject = JSON.parse(request.responseText);
+        }catch{
+          console.error('could not parse JSON');
+          form.submitButton.disabled = false;
+        }
+
+        if(responseObject){
+          handleResponse(responseObject);
+          form.submitButton.disabled = false;
+        }
+
+      }; 
+ 
+      firebase.auth().currentUser.getIdToken(/* forceRefresh */ true).then(function(idToken) {
+      request.open('post', 'https://asia-east2-unifi-customer-handler.cloudfunctions.net/api/register/customer');
+      request.setRequestHeader('Content-Type', 'application/json');
+      request.setRequestHeader('Authorization', `Bearer ${idToken}`);
+      request.send(JSON.stringify({
+    name: `${form.name.value}`,
+    icNumber: `${form.ic.value}`,
+    email: `${form.email.value}`,
+    phone: `${form.phone.value}`,
+    address1: `${form.address1.value}`,
+    address2: `${form.address2.value}`,
+    city: `${form.city.value}`,
+    state: `${form.state.value}`,
+    zip: `${form.zip.value}`,
+    package: `${form.package.value}`
+}));
+
+}).catch(function(error) {
+  console.error(error);
+});
+
+    
+
+
+
+    });
+
+
+    function handleResponse(responseObject){
+      console.log(responseObject)
+      if(responseObject.success){
+        form.messages.style.border = "1px solid green";
+        form.messages.style.color = "green";
+        form.messages.style.backgroundColor = "rgb(232, 255, 232)";
+      }else {
+        form.messages.style.border = "1px solid red";
+        form.messages.style.color = "red";
+        form.messages.style.backgroundColor = "rgb(255, 232, 232)";
+      }
+      while(form.messages.firstChild){
+          form.messages.removeChild(form.messages.firstChild);
+        }
+          responseObject.messages.forEach(message => {
+            const li = document.createElement('li');
+          li.textContent = message;
+          form.messages.appendChild(li);
+          });
+          
+
+      form.messages.style.display = "block";
+    }
+
+
+  </script>
+  <script src="../vendor/jquery/jquery.min.js"></script>
+  <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+ 
+</body>
+
+</html>
