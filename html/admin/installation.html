@@ -68,7 +68,9 @@
     </nav>
 
   <section class="small-container" >
-    <br><h2 class="text-center">Waiting for installation</h2><br>
+    <br><h2 class="text-center">Waiting for installation</h2><br> 
+    <p class="company">Branch ID: RSSL284</p>
+    <p class="company">Partner Code: RSSL284AA</p>
     <table class="table " id="customerTable">
         <thead>
             <tr>
@@ -171,8 +173,8 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
 function loadCustomers() {
 
 const request = new XMLHttpRequest;
-request.open("get", "https://asia-east2-unifi-customer-handler.cloudfunctions.net/api/table/install");
-
+request.open("get", "https://asia-east2-unifi-customer-handler.cloudfunctions.net/api/table/verify");
+request.setRequestHeader('Content-Type', 'application/json');
 request.onload = () => {
   try{
     const json= JSON.parse(request.responseText);
@@ -211,11 +213,6 @@ function loadTable(json){
       <td>${obj.state}</td>
       <td>${obj.zip}</td>
       <td>${obj.package}</td>
-      <td>5 february</td>
-        <td  style="padding: 0;"> <button class="" id="back">  <i class="fas fa-arrow-left"></i> </button> </td>    
-        <td  style="padding: 0;"> <button class="" id="edit">  <i class="fas fa-edit"></i> </button> </td>        
-        <td  style="padding: 0;"> <button class="" id="next">  <i class="fas fa-arrow-right"></i> </button> </td>
-        <td  style="padding: 0;"> <button class="" id="purge">  <i class="fas fa-trash"></i> </button> </td>  
       `;
   });
 

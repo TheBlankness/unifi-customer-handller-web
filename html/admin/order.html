@@ -8,7 +8,11 @@
   <meta name="description" content="unifi">
   <meta name="author" content="">
 
-  <title>Unifi Agent</title>
+  <title>Unifi Admin</title>
+
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/7.4.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/6.1.1/firebase-auth.js"></script>
 
   <!-- Bootstrap core CSS -->
   <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -30,7 +34,7 @@
   <nav class="navbar navbar-expand-lg " id="boren">
       <div class="container">
         <a class="navbar-brand" href="#">
-        <h4 class="hitam">UNIFI AGENT</h4>        
+        <h4 class="hitam">UNIFI ADMIN</h4>        
         </a>
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample07" aria-controls="navbarsExample07"
@@ -65,9 +69,7 @@
 
   <section class="small-container" >
     <br><h2 class="text-center">Order (unifi portal)</h2><br>
-    <p class="company">Branch ID: RSSL284</p>
-    <p class="company">Partner Code: RSSL284AA</p>
-    <table class="table ">
+    <table class="table " id="customerTable">
         <thead >
             <tr>
         <th scope="col">#</th>
@@ -83,8 +85,7 @@
         <th scope="col">Package</th>
         <th scope="col"></th>
         <th scope="col"></th>
-        <th scope="col"></th>
-        <th scope="col"></th>
+
       </tr>
     </thead>
     <tbody>
@@ -100,10 +101,42 @@
         <td>stalingrad</td>        
         <td>45668</td>
         <td>Unifi home:: RM99/month</td>
-        <td  style="padding: 0;"> <button class="" id="back">  <i class="fas fa-arrow-left"></i> </button> </td>    
-        <td  style="padding: 0;"> <button class="" id="purge">  <i class="fas fa-edit"></i> </button> </td>        
-        <td  style="padding: 0;"> <button class="" id="next">  <i class="fas fa-arrow-right"></i> </button> </td>
-        <td  style="padding: 0;"> <button class="" id="purge">  <i class="fas fa-trash"></i> </button> </td>      
+        <td  style="padding: 0;"> <button class="" id="next">  <i class="fas fa-arrow-left"></i> </button> </td>        
+        <td  style="padding: 0;"> <button class="" id="next">  <i class="fas fa-arrow-right"></i> </button> </td>        
+
+      </tr>
+      <tr>
+        <td>1</td>        
+        <td>Mark</td>
+        <td>Otto</td>
+        <td>@mdo</td>
+        <td>1</td>        
+        <td>Mark</td>
+        <td>Otto</td>
+        <td>@mdo</td>
+        <td>1</td>        
+        <td>Mark</td>
+        <td>Otto</td>
+        <td  style="padding: 0;"> <button class="" id="next">  <i class="fas fa-arrow-left"></i> </button> </td>        
+        <td  style="padding: 0;"> <button class="" id="next">  <i class="fas fa-arrow-right"></i> </button> </td>    
+    
+
+      </tr>
+      <tr>
+        <td>1</td>        
+        <td>Mark</td>
+        <td>Otto</td>
+        <td>@mdo</td>
+        <td>1</td>        
+        <td>Mark</td>
+        <td>Otto</td>
+        <td>@mdo</td>
+        <td>1</td>        
+        <td>Mark</td>
+        <td>Otto</td>
+        <td  style="padding: 0;"> <button class="" id="next">  <i class="fas fa-arrow-left"></i> </button> </td>        
+        <td  style="padding: 0;"> <button class="" id="next">  <i class="fas fa-arrow-right"></i> </button> </td>  
+
       </tr>
     </tbody>
   </table>
@@ -113,6 +146,141 @@
   <!-- Bootstrap core JavaScript -->
   <script src="../vendor/jquery/jquery.min.js"></script>
   <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<script>
+ var firebaseConfig = {
+    apiKey: "AIzaSyBV9rQNhxkKV6a62CDgKU2IiatGxV_572Q",
+    authDomain: "unifi-customer-handler.firebaseapp.com",
+    databaseURL: "https://unifi-customer-handler.firebaseio.com",
+    projectId: "unifi-customer-handler",
+    storageBucket: "unifi-customer-handler.appspot.com",
+    messagingSenderId: "126635632868",
+    appId: "1:126635632868:web:d2c7f9bc8b699759f124f1",
+    measurementId: "G-7PE19PG761"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+
+
+  function logout(){
+  firebase.auth().signOut();
+}
+
+var gIdToken ="";
+
+firebase.auth().onAuthStateChanged(firebaseUser => {
+   
+   if(firebaseUser){
+   
+   }else{
+      window.location.replace("../index.html");
+   }
+})
+
+function loadCustomers() {
+
+const request = new XMLHttpRequest;
+request.open("get", "https://asia-east2-unifi-customer-handler.cloudfunctions.net/api/table/order");
+
+request.onload = () => {
+  try{
+    const json= JSON.parse(request.responseText);
+    loadTable(json);
+  } catch {
+    console.warn("could not load data");
+  }
+};
+  request.setRequestHeader('Authorization', `Bearer ${gIdToken}`);
+  request.send();
+
+      
+    }
+
+
+const customerTable = document.querySelector("#customerTable > tbody")
+
+function loadTable(json){
+  //clear data
+  while(customerTable.firstChild){
+    customerTable.removeChild(customerTable.firstChild);
+  }
+
+  //populate data
+  json.forEach((obj) => {
+      const row = customerTable.insertRow(-1)
+    row.innerHTML = ` 
+    <td>${obj.count}</td>
+      <td>${obj.name}</td>
+      <td>${obj.icNumber}</td>
+      <td>${obj.email}</td>
+      <td>${obj.phone}</td>
+      <td>${obj.address1}</td>
+      <td>${obj.address2}</td>
+      <td>${obj.city}</td>
+      <td>${obj.state}</td>
+      <td>${obj.zip}</td>
+      <td>${obj.package}</td>
+      <td  style="padding: 0;"> <button onclick="backCustomer('${obj.id}');" id="back">  <i class="fas fa-arrow-left"></i> </button> </td> 
+      <td  style="padding: 0;"> <button class="" id="purge">  <i class="fas fa-edit"></i> </button> </td>        
+      <td  style="padding: 0;"> <button onclick="moveCustomer('${obj.id}');" id="next">  <i class="fas fa-arrow-right"></i> </button> </td>
+      <td  style="padding: 0;"> <button class="" id="purge">  <i class="fas fa-trash"></i> </button> </td>  
+      `;
+  });
+
+}
+//loads data on refresh
+document.addEventListener("DOMContentLoaded", () => {
+
+  firebase.auth().onAuthStateChanged(firebaseUser => {
+   
+   if(firebaseUser){
+    firebase.auth().currentUser.getIdToken(/* forceRefresh */ true).then(function(idToken) {
+      gIdToken=idToken;
+      
+      loadCustomers();
+}).catch(function(error) {
+  // Handle error
+});
+   }else{
+      window.location.replace("../index.html");
+   }
+})
+});
+
+
+//move Customer
+function moveCustomer(id) {
+  const request = new XMLHttpRequest;
+  request.open("put", `https://asia-east2-unifi-customer-handler.cloudfunctions.net/api/move/install/${id}`);
+  request.setRequestHeader('Authorization', `Bearer ${gIdToken}`);
+  request.onload = () => {
+    try{
+      const json= JSON.parse(request.responseText);
+      loadCustomers();
+    } catch {
+      console.warn("could not load data");
+    }
+  };
+  request.send();
+}
+
+//move customr back
+function backCustomer(id) {
+  const request = new XMLHttpRequest;
+  request.open("put", `https://asia-east2-unifi-customer-handler.cloudfunctions.net/api/move/thumbprint/${id}`);
+  request.setRequestHeader('Authorization', `Bearer ${gIdToken}`);
+  request.onload = () => {
+    try{
+      const json= JSON.parse(request.responseText);
+      loadCustomers();
+    } catch {
+      console.warn("could not load data");
+    }
+  };
+  request.send();
+}
+</script>
+
 </body>
 
 </html>

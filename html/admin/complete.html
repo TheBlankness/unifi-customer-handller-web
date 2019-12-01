@@ -1,73 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content="unifi" />
+    <meta name="author" content="" />
 
-<head>
+    <title>Unifi Admin</title>
 
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="unifi">
-  <meta name="author" content="">
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/7.4.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.1.1/firebase-auth.js"></script>
 
-  <title>Unifi Agent</title>
+    <!-- Bootstrap core CSS -->
+    <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
 
-  <!-- Bootstrap core CSS -->
-  <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom fonts for this template -->
+    <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" />
+    <link
+      href="../vendor/simple-line-icons/css/simple-line-icons.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic"
+      rel="stylesheet"
+      type="text/css"
+    />
 
-  <!-- Custom fonts for this template -->
-  <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
-  <link href="../vendor/simple-line-icons/css/simple-line-icons.css" rel="stylesheet" type="text/css">
-  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+    <!-- Custom styles for this template -->
+    <link href="../css/landing-page.css" rel="stylesheet" />
 
-  <!-- Custom styles for this template -->
-  <link href="../css/landing-page.css" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+  </head>
 
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-</head>
-
-<body>
-
-  <!-- Navigation -->
-  <nav class="navbar navbar-expand-lg " id="boren">
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg " id="boren">
       <div class="container">
         <a class="navbar-brand" href="#">
-        <h4 class="hitam">UNIFI AGENT</h4>        
+          <h4 class="hitam">UNIFI ADMIN</h4>
         </a>
 
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample07" aria-controls="navbarsExample07"
-         aria-expanded="false" aria-label="Toggle navigation" >
-            <span class="icon-menu "></span>
-          </button>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarsExample07"
+          aria-controls="navbarsExample07"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="icon-menu "></span>
+        </button>
 
-          <div class="navbar-collapse collapse" id="navbarsExample07" >
-              <ul class="navbar navbar-nav navbar-right ml-auto">
-                <li class="nav-item">
-                  <a class="nav-link navi" href="verify.html">VERIFY</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link navi"  href="thumbprint.html">THUMBPRINT</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link navi "  href="order.html">ORDER</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link navi "  href="installation.html">INSTALLATION</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link " id="pilih" href="#">COMPLETE</a>
-                  </li>
-                  <li class="nav-item">
-                      <a class="nav-link navi" style="border-radius: 10px;" onclick="logout()" href="#"><i class="fas fa-sign-out-alt"></i></a>
-                      </li>
-              </ul>
-            </div>
+        <div class="navbar-collapse collapse" id="navbarsExample07">
+          <ul class="navbar navbar-nav navbar-right ml-auto">
+            <li class="nav-item">
+              <a class="nav-link navi" href="verify.html">VERIFY</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link navi" href="thumbprint.html">THUMBPRINT</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link navi " href="order.html">ORDER</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link navi" href="installation.html">INSTALLATION</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link navi " id="pilih" href="#">COMPLETE</a>
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link navi"
+                style="border-radius: 10px;"
+                onclick="logout()"
+                href="#"
+                ><i class="fas fa-sign-out-alt"></i
+              ></a>
+            </li>
+          </ul>
+        </div>
       </div>
     </nav>
 
-  <section class="small-container" >
-    <br><h2 class="text-center">Complete</h2><br>
-    <p class="company">Branch ID: RSSL284</p>
-    <p class="company">Partner Code: RSSL284AA</p>
-    <table class="table ">
+    <section class="small-container">
+      <br />
+      <h2 class="text-center">Waiting for installation</h2>
+      <br />
+      <p class="company">Branch ID: RSSL284</p>
+      <p class="company">Partner Code: RSSL284AA</p>
+      <table class="table " id="customerTable">
         <thead>
           <tr>
             <th scope="col">#</th>
@@ -86,32 +116,107 @@
             <th scope="col">Agent Name</th>
           </tr>
         </thead>
-    <tbody>
-      <tr>
-        <td>1</td>        
-        <td>Cyka al-blyat</td>
-        <td>548785145402</td>
-        <td>cykablyat@nahui.com</td>
-        <td>658798451</td>        
-        <td>3, 57th street</td>
-        <td>eastern gulag</td>
-        <td>ruski</td>
-        <td>stalingrad</td>        
-        <td>45668</td>
-        <td>Unifi home:: RM99/month</td>
-        <td>5 february</td>   
-        <td>7 Februari</td>
-        <td>hazem</td>
-      </tr>
+        <tbody></tbody>
+      </table>
+    </section>
 
-    </tbody>
-  </table>
-  
-  </section>
+    <!-- Bootstrap core JavaScript -->
+    <script src="../vendor/jquery/jquery.min.js"></script>
+    <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-  <!-- Bootstrap core JavaScript -->
-  <script src="../vendor/jquery/jquery.min.js"></script>
-  <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-</body>
+    <script>
+      var firebaseConfig = {
+        apiKey: "AIzaSyBV9rQNhxkKV6a62CDgKU2IiatGxV_572Q",
+        authDomain: "unifi-customer-handler.firebaseapp.com",
+        databaseURL: "https://unifi-customer-handler.firebaseio.com",
+        projectId: "unifi-customer-handler",
+        storageBucket: "unifi-customer-handler.appspot.com",
+        messagingSenderId: "126635632868",
+        appId: "1:126635632868:web:d2c7f9bc8b699759f124f1",
+        measurementId: "G-7PE19PG761"
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
 
+      function logout() {
+        firebase.auth().signOut();
+      }
+
+      var gIdToken = "";
+
+      firebase.auth().onAuthStateChanged(firebaseUser => {
+        if (firebaseUser) {
+        } else {
+          window.location.replace("../index.html");
+        }
+      });
+
+      function loadCustomers() {
+        const request = new XMLHttpRequest();
+        request.open(
+          "get",
+          "https://asia-east2-unifi-customer-handler.cloudfunctions.net/api/table/verify"
+        );
+        request.setRequestHeader("Content-Type", "application/json");
+        request.onload = () => {
+          try {
+            const json = JSON.parse(request.responseText);
+            loadTable(json);
+          } catch {
+            console.warn("could not load data");
+          }
+        };
+        request.setRequestHeader("Authorization", `Bearer ${gIdToken}`);
+        request.send();
+      }
+
+      const customerTable = document.querySelector("#customerTable > tbody");
+
+      function loadTable(json) {
+        //clear data
+        while (customerTable.firstChild) {
+          customerTable.removeChild(customerTable.firstChild);
+        }
+
+        //populate data
+        json.forEach(obj => {
+          const row = customerTable.insertRow(-1);
+          row.innerHTML = ` 
+    <td>${obj.count}</td>
+      <td>${obj.name}</td>
+      <td>${obj.icNumber}</td>
+      <td>${obj.email}</td>
+      <td>${obj.phone}</td>
+      <td>${obj.address1}</td>
+      <td>${obj.address2}</td>
+      <td>${obj.city}</td>
+      <td>${obj.state}</td>
+      <td>${obj.zip}</td>
+      <td>${obj.package}</td>
+      <td>${obj.agent}</td>
+      `;
+        });
+      }
+      //loads data on refresh
+      document.addEventListener("DOMContentLoaded", () => {
+        firebase.auth().onAuthStateChanged(firebaseUser => {
+          if (firebaseUser) {
+            firebase
+              .auth()
+              .currentUser.getIdToken(/* forceRefresh */ true)
+              .then(function(idToken) {
+                gIdToken = idToken;
+
+                loadCustomers();
+              })
+              .catch(function(error) {
+                // Handle error
+              });
+          } else {
+            window.location.replace("../index.html");
+          }
+        });
+      });
+    </script>
+  </body>
 </html>
