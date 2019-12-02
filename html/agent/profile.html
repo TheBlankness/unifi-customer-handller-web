@@ -111,11 +111,7 @@
         <th scope="col">State</th>
         <th scope="col">ZipCode</th>
         <th scope="col">Package</th>
-        <th scope="col">process</th>
-        <th scope="col"></th>
-        <th scope="col"></th>
-        <th scope="col"></th>
-
+ 
       </tr>
     </thead>
     <tbody>
@@ -131,10 +127,6 @@
         <td>Loading........</td>        
         <td>Loading........</td>
         <td>Loading........</td>
-        <td>Loading........</td>
-        <td  style="padding: 0;"> <button onclick="deleteCustomer();" id="purge">  <i class="fas fa-trash"></i> </button> </td>        
-        <td  style="padding: 0;"> <button class="" id="next">  <i class="fas fa-arrow-right"></i> </button> </td>        
-        <td  style="padding: 0;"> <button class="" id="next">  <i class="fas fa-edit"></i> </button> </td>        
       </tr>
     </tbody>
   </table>
@@ -230,94 +222,6 @@ function loadTable(json){
       <td>${obj.state}</td>
       <td>${obj.zip}</td>
       <td>${obj.package}</td>
-      <td>${obj.table}</td>
-      <td  style="padding: 0;"> <button onclick="deleteCustomer('${obj.id}');" id="purge">  <i class="fas fa-trash"></i> </button> </td>             
-      <td  style="padding: 0;"> <button data-toggle="modal" data-target="#modal${obj.id}" id="edit">  <i class="fas fa-edit"></i> </button> </td>  
-      <!-- Modal -->
-      <div class="modal fade" id="modal${obj.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-          <div class="modal-content">
-            <div class="modal-body">
-                <div class="form-row">
-                  <form>
-                    <div class="form-group col-md-9">
-                      <label for="name">Name</label>
-                      <input type="text" class="form-control" id="name${obj.count}" value="${obj.name}">
-                    </div>
-                    <div class="form-group col-md-3">
-                      <label for="ic">IC number</label>
-                      <input type="text" class="form-control" id="icNumber${obj.count}" value="${obj.icNumber}">
-                    </div>
-                  </div>
-                  <div class="form-row">
-                    <div class="form-group col-md-6">
-                      <label for="name">Email address</label>
-                      <input type="email" class="form-control" id="email${obj.count}" value="${obj.email}">
-                    </div>
-                    <div class="form-group col-md-6">
-                      <label for="ic">Phone number</label>
-                      <input type="text" class="form-control" id="phone${obj.count}" value="${obj.phone}">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="address1">Address Line 1</label>
-                    <input type="text" class="form-control" id="address1${obj.count}" value="${obj.address1}">
-                  </div>
-                  <div class="form-group">
-                    <label for="address2">Address Line 2</label>
-                    <input type="text" class="form-control" id="address2${obj.count}" value="${obj.address2}">
-                  </div>
-                  <div class="form-row">
-                    <div class="form-group col-md-6">
-                      <label for="city">City</label>
-                      <input type="text" class="form-control" id="city${obj.count}" value="${obj.city}">
-                    </div>
-                    <div class="form-group col-md-4">
-                      <label for="state">State</label>
-                      <select id="state${obj.count}" class="form-control">
-                          <option disabled selected value="${obj.state}">${obj.state}</option>
-                <option value="Kuala Lumpur">Kuala Lumpur</option>
-                <option value="Johor">Johor</option>
-                <option value="Melaka">Melaka</option>
-                <option value="Negeri Sembilan">Negeri Sembilan</option>
-                <option value="Pahang">Pahang</option>
-                <option value="Selangor">Selangor</option>
-                <option value="Kelantan">Kelantan</option>
-                <option value="Terengganu">Terengganu</option>
-                <option value="Perak">Perak</option>
-                <option value="Kedah">Kedah</option>
-                <option value="Pulau Pinang">Pulau Pinang</option>
-                <option value="Perlis">Perlis</option>
-                      </select>
-                    </div>
-                    <div class="form-group col-md-2">
-                      <label for="zip">ZipCode</label>
-                      <input type="text" class="form-control" id="zip${obj.count}" value="${obj.zip}">
-                    </div>
-                  </div>
-                  <div class="form-group col-md-13">
-                      <label for="state">Package</label>
-                      <select id="package${obj.count}" class="form-control" >
-                          <option disabled selected value="${obj.package}">${obj.package}</option>
-                  <option value="89">Unifi Home: RM89/month</option>
-                  <option value="99">Unifi Home: RM99/month</option>
-                  <option value="129">Unifi Home: RM129/month</option>
-                  <option value="159">Unifi Home: RM159/month</option>
-                  <option value="199">Unifi Home: RM199/month</option>
-                  <option value="139">Unifi Biz: RM139/month</option>
-                  <option value="249">Unifi Biz: RM249/month</option>
-                  <option value="349">Unifi Biz: RM349/month</option>
-                      </select>
-                    </div>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button id="saveButton" type="button" data-dismiss="modal" onclick="updateCustomer('${obj.id}',${obj.count});" class="btn btn-warning">Register</button>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
     `;
   });
 

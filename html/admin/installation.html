@@ -60,7 +60,10 @@
                     <a class="nav-link navi "  href="complete.html">COMPLETE</a>
                   </li>
                   <li class="nav-item">
-                      <a class="nav-link navi" style="border-radius: 10px;" onclick="logout()" href="#"><i class="fas fa-sign-out-alt"></i></a>
+                    <a class="nav-link navi nav_icon"  href="recycle.html"> <i class="fas fa-trash"></i> </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link  nav_icon" onclick="logout()" href="#"><i class="fas fa-sign-out-alt"></i></a>
                       </li>
               </ul>
             </div>
@@ -111,7 +114,6 @@
       </tr>
     </tbody>
   </table>
-  
   </section>
 
   <!-- Bootstrap core JavaScript -->
@@ -191,12 +193,7 @@ function loadTable(json){
       <td>${obj.state}</td>
       <td>${obj.zip}</td>
       <td>${obj.package}</td>
-      <td  style="padding: 0;"> <button class="" id="next">  <i class="fas fa-arrow-left"></i> </button> </td>        
-        <td  style="padding: 0;"> <button class="" id="next">  <i class="fas fa-edit"></i> </button> </td>    
-        <td  style="padding: 0;"> <button class="" id="next">  <i class="fas fa-arrow-right"></i> </button> </td>        
-        <td  style="padding: 0;"> <button class="" id="next">  <i class="fas fa-trash"></i> </button> </td>  
-
-         <td  style="padding: 0;"> <button onclick="backCustomer('${obj.id}');" id="back">  <i class="fas fa-arrow-left"></i> </button> </td> 
+      <td  style="padding: 0;"> <button onclick="backCustomer('${obj.id}');" id="back">  <i class="fas fa-arrow-left"></i> </button> </td> 
       <td  style="padding: 0;"> <button class="" id="edit">  <i class="fas fa-edit"></i> </button> </td>        
       <td  style="padding: 0;"> <button onclick="moveCustomer('${obj.id}');" id="next">  <i class="fas fa-arrow-right"></i> </button> </td>
       <td  style="padding: 0;"> <button class="" id="purge">  <i class="fas fa-trash"></i> </button> </td>  

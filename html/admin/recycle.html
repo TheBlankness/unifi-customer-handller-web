@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="unifi">
@@ -11,6 +13,7 @@
 <!-- Firebase SDK -->
 <script src="https://www.gstatic.com/firebasejs/7.4.0/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/6.1.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/6.1.1/firebase-firestore.js"></script>
 
   <!-- Bootstrap core CSS -->
   <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -19,17 +22,20 @@
   <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
   <link href="../vendor/simple-line-icons/css/simple-line-icons.css" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+
   <!-- Custom styles for this template -->
   <link href="../css/landing-page.css" rel="stylesheet">
+
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 
 <body>
+
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg " id="boren">
       <div class="container">
         <a class="navbar-brand" href="#">
-        <h4 class="hitam">YCOM ADMIN</h4>        
+        <h4 class="hitam">YCOM ADMIN</h4> 
         </a>
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample07" aria-controls="navbarsExample07"
@@ -43,7 +49,7 @@
                   <a class="nav-link navi" href="verify.html">VERIFY</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link " id="pilih" href="#">THUMBPRINT</a>
+                  <a class="nav-link navi"  href="thumbprint.html">THUMBPRINT</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link navi "  href="order.html">ORDER</a>
@@ -55,7 +61,7 @@
                     <a class="nav-link navi "  href="complete.html">COMPLETE</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link navi nav_icon"  href="recycle.html"> <i class="fas fa-trash"></i> </a>
+                    <a class="nav-link nav_icon" id="pilih" style="border-radius: 10px;" href="recycle.html"> <i class="fas fa-trash"></i> </a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link nav_icon" onclick="logout()" href="#"><i class="fas fa-sign-out-alt"></i></a>
@@ -65,15 +71,14 @@
       </div>
     </nav>
 
-
-
   <section class="small-container" >
-    <br><h2 class="text-center">Thumbprint (e-form)</h2><br>
-    <p class="company">Branch ID: RSSL284</p>
-    <p class="company">Partner Code: RSSL284AA</p>
+    <br><h2 class="text-center">Recycle Table</h2><br>
+      <p class="company">Branch ID: RSSL284</p>
+      <p class="company">Partner Code: RSSL284AA</p>
+
     <table class="table " id="customerTable">
-    <thead >
-      <tr>
+        <thead>
+            <tr>
         <th scope="col">#</th>
         <th scope="col">Name</th>
         <th scope="col">IC number</th>
@@ -85,13 +90,8 @@
         <th scope="col">State</th>
         <th scope="col">ZipCode</th>
         <th scope="col">Package</th>
-        <th scope="col">Appointment</th>
         <th scope="col"></th>
         <th scope="col"></th>
-        <th scope="col"></th>
-        <th scope="col"></th>
-        <th scope="col"></th>
-
       </tr>
     </thead>
     <tbody>
@@ -107,32 +107,18 @@
         <td>Loading........</td>
         <td>Loading........</td>
         <td>Loading........</td>
-        <td id="appointment">Loading...</td>
-        <td  style="padding: 0;"> <button class="" id="back">  <i class="fas fa-arrow-left"></i> </button> </td>    
-        <td  style="padding: 0;"> <button class="" id="purge">  <i class="fas fa-edit"></i> </button> </td>        
-        <td  style="padding: 0;"> <button class="" id="next">  <i class="fas fa-arrow-right"></i> </button> </td>
+        <td  style="padding: 0;"> <button class="" id="next">  <i class="fas fa-recycle"></i> </button> </td>    
         <td  style="padding: 0;"> <button class="" id="purge">  <i class="fas fa-trash"></i> </button> </td>        
-        <td  style="padding: 0;"> <button data-toggle="modal" data-target="#exampleModalCenter" id="next">  <i class="fas fa-calendar-check"></i> </button> </td>        
-
       </tr>
-            </tbody>
+    
     </tbody>
   </table>
-  
   </section>
-
   <!-- Bootstrap core JavaScript -->
   <script src="../vendor/jquery/jquery.min.js"></script>
   <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script>
-    function appointment(){
-      var date = document.getElementById('date').value;
-      var time = document.getElementById('time').value;
-
-      document.getElementById('appointment').innerHTML = date + " " + time;
-    }
-
-    var firebaseConfig = {
+   var firebaseConfig = {
     apiKey: "AIzaSyBV9rQNhxkKV6a62CDgKU2IiatGxV_572Q",
     authDomain: "unifi-customer-handler.firebaseapp.com",
     databaseURL: "https://unifi-customer-handler.firebaseio.com",
@@ -143,8 +129,9 @@
     measurementId: "G-7PE19PG761"
   };
   // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
+  var app = firebase.initializeApp(firebaseConfig);
 
+  var db = firebase.firestore(app);
 
   function logout(){
   firebase.auth().signOut();
@@ -164,7 +151,7 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
 function loadCustomers() {
 
 const request = new XMLHttpRequest;
-request.open("get", "https://asia-east2-unifi-customer-handler.cloudfunctions.net/api/table/thumbprint");
+request.open("get", "https://asia-east2-unifi-customer-handler.cloudfunctions.net/api/table/verify");
 
 request.onload = () => {
   try{
@@ -204,28 +191,94 @@ function loadTable(json){
       <td>${obj.state}</td>
       <td>${obj.zip}</td>
       <td>${obj.package}</td>
-      <td>${obj.date}</td>
-      <td  style="padding: 0;"> <button onclick="backCustomer('${obj.id}');" id="back">  <i class="fas fa-arrow-left"></i> </button> </td> 
+      <td  style="padding: 0;"> <button onclick="restoreCustomer('${obj.id}');" id="next">  <i class="fas fa-recycle"></i> </button> </td>
       <td  style="padding: 0;"> <button onclick="deleteCustomer('${obj.id}');" id="purge">  <i class="fas fa-trash"></i> </button> </td>             
-      <td  style="padding: 0;"> <button onclick="moveCustomer('${obj.id}');" id="next">  <i class="fas fa-arrow-right"></i> </button> </td>
-      <td  style="padding: 0;"> <button data-toggle="modal" data-target="#modal${obj.id}" id="next">  <i class="fas fa-calendar-check"></i> </button> </td>  
-      <!-- popup modal -->
-<div class="modal fade" id="modal${obj.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-   
-      <div class="modal-body">
-            <input class="form-control " type="date" name="" id="date${obj.count}">
-            <input class="form-control " type="time" name="" id="time${obj.count}">
+      <!-- Modal -->
+      <div class="modal fade" id="modal${obj.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-body">
+                <div class="form-row">
+                  <form>
+                    <div class="form-group col-md-9">
+                      <label for="name">Name</label>
+                      <input type="text" class="form-control" id="name${obj.count}" value="${obj.name}">
+                    </div>
+                    <div class="form-group col-md-3">
+                      <label for="ic">IC number</label>
+                      <input type="text" class="form-control" id="icNumber${obj.count}" value="${obj.icNumber}">
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group col-md-6">
+                      <label for="name">Email address</label>
+                      <input type="email" class="form-control" id="email${obj.count}" value="${obj.email}">
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label for="ic">Phone number</label>
+                      <input type="text" class="form-control" id="phone${obj.count}" value="${obj.phone}">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="address1">Address Line 1</label>
+                    <input type="text" class="form-control" id="address1${obj.count}" value="${obj.address1}">
+                  </div>
+                  <div class="form-group">
+                    <label for="address2">Address Line 2</label>
+                    <input type="text" class="form-control" id="address2${obj.count}" value="${obj.address2}">
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group col-md-6">
+                      <label for="city">City</label>
+                      <input type="text" class="form-control" id="city${obj.count}" value="${obj.city}">
+                    </div>
+                    <div class="form-group col-md-4">
+                      <label for="state">State</label>
+                      <select id="state${obj.count}" class="form-control">
+                          <option disabled selected value="${obj.state}">${obj.state}</option>
+                <option value="Kuala Lumpur">Kuala Lumpur</option>
+                <option value="Johor">Johor</option>
+                <option value="Melaka">Melaka</option>
+                <option value="Negeri Sembilan">Negeri Sembilan</option>
+                <option value="Pahang">Pahang</option>
+                <option value="Selangor">Selangor</option>
+                <option value="Kelantan">Kelantan</option>
+                <option value="Terengganu">Terengganu</option>
+                <option value="Perak">Perak</option>
+                <option value="Kedah">Kedah</option>
+                <option value="Pulau Pinang">Pulau Pinang</option>
+                <option value="Perlis">Perlis</option>
+                      </select>
+                    </div>
+                    <div class="form-group col-md-2">
+                      <label for="zip">ZipCode</label>
+                      <input type="text" class="form-control" id="zip${obj.count}" value="${obj.zip}">
+                    </div>
+                  </div>
+                  <div class="form-group col-md-13">
+                      <label for="state">Package</label>
+                      <select id="package${obj.count}" class="form-control" >
+                          <option disabled selected value="${obj.package}">${obj.package}</option>
+                  <option value="89">Unifi Home: RM89/month</option>
+                  <option value="99">Unifi Home: RM99/month</option>
+                  <option value="129">Unifi Home: RM129/month</option>
+                  <option value="159">Unifi Home: RM159/month</option>
+                  <option value="199">Unifi Home: RM199/month</option>
+                  <option value="139">Unifi Biz: RM139/month</option>
+                  <option value="249">Unifi Biz: RM249/month</option>
+                  <option value="349">Unifi Biz: RM349/month</option>
+                      </select>
+                    </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button id="saveButton" type="button" data-dismiss="modal" onclick="updateCustomer('${obj.id}',${obj.count});" class="btn btn-warning">Register</button>
+              </form>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" onclick="appointment()" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
-      `;
+    `;
   });
 
 }
@@ -246,7 +299,16 @@ document.addEventListener("DOMContentLoaded", () => {
       window.location.replace("../index.html");
    }
 })
+
+  
+  
 });
+
+db.collection("customers").doc()
+    .onSnapshot(function(doc) {
+      loadCustomers();
+        console.log("Current data: ", doc.data());
+    });
 
 //delete customer based on ID
 function deleteCustomer(id) {
@@ -265,22 +327,7 @@ function deleteCustomer(id) {
 }
 
 //move Customer
-function moveCustomer(id) {
-  const request = new XMLHttpRequest;
-  request.open("put", `https://asia-east2-unifi-customer-handler.cloudfunctions.net/api/move/order/${id}`);
-  request.setRequestHeader('Authorization', `Bearer ${gIdToken}`);
-  request.onload = () => {
-    try{
-      const json= JSON.parse(request.responseText);
-      loadCustomers();
-    } catch {
-      console.warn("could not load data");
-    }
-  };
-  request.send();
-}
-
-function backCustomer(id) {
+function restoreCustomer(id) {
   const request = new XMLHttpRequest;
   request.open("put", `https://asia-east2-unifi-customer-handler.cloudfunctions.net/api/move/verify/${id}`);
   request.setRequestHeader('Authorization', `Bearer ${gIdToken}`);

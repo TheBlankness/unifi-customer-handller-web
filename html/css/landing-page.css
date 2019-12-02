@@ -230,6 +230,16 @@ footer.footer {
   color: black;
   background: white;
 }
+.nav_icon{
+  color: black;
+  border-radius: 10px;
+  margin-right: 10px;
+}
+.nav_icon:hover{
+  color: black;
+  background: white;
+}
+
 .hitam{
   color: black;
 }
