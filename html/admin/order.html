@@ -310,7 +310,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button id="saveButton" type="button" data-dismiss="modal" onclick="updateCustomer('${obj.id}',${obj.count});" class="btn btn-warning">Register</button>
+              <button id="saveButton" type="button" data-dismiss="modal" onclick="updateCustomer('${obj.id}',${obj.count});" class="btn btn-warning">Update</button>
               </form>
             </div>
           </div>
@@ -318,9 +318,8 @@
       </div>
       <!-- END -->
 
-
       <!-- Modal delete -->
-      <div class="modal fade" id="purge${obj.count}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal fade" id="purge${obj.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
             <div class="modal-header">
@@ -402,8 +401,8 @@
       function deleteCustomer(id) {
         const request = new XMLHttpRequest();
         request.open(
-          "delete",
-          `https://asia-east2-unifi-customer-handler.cloudfunctions.net/api/delete/customer/${id}`
+          "put",
+          `https://asia-east2-unifi-customer-handler.cloudfunctions.net/api/move/recycle/${id}`
         );
         request.setRequestHeader("Authorization", `Bearer ${gIdToken}`);
         request.onload = () => {
@@ -416,6 +415,49 @@
         };
         request.send();
       }
+
+        function updateCustomer(custID,number) {
+        const form = {
+        name: document.getElementById('name' + number),
+        icNumber: document.getElementById('icNumber' + number),
+        email: document.getElementById('email' + number),
+        phone: document.getElementById('phone' + number),
+        address1: document.getElementById('address1' + number),
+        address2: document.getElementById('address2' + number),
+        city: document.getElementById('city' + number),
+        state: document.getElementById('state' + number),
+        zip: document.getElementById('zip' + number),
+        package: document.getElementById('package' + number)
+      };
+
+      const request = new XMLHttpRequest;
+      request.onload = () => {
+        try{
+          const json= JSON.parse(request.responseText);
+
+          loadCustomers();
+        } catch {
+          console.warn("could not load data");
+        }
+      };
+
+      request.open("put", `https://asia-east2-unifi-customer-handler.cloudfunctions.net/api/update/customer/${custID}`);
+      request.setRequestHeader('Content-Type', 'application/json');
+      request.setRequestHeader('Authorization', `Bearer ${gIdToken}`);
+      request.send(JSON.stringify({
+        name: `${form.name.value}`,
+        icNumber: `${form.icNumber.value}`,
+        email: `${form.email.value}`,
+        phone: `${form.phone.value}`,
+        address1: `${form.address1.value}`,
+        address2: `${form.address2.value}`,
+        city: `${form.city.value}`,
+        state: `${form.state.value}`,
+        zip: `${form.zip.value}`,
+        package: `${form.package.value}`
+    }));
+
+  }
     </script>
   </body>
 </html>

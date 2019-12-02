@@ -88,6 +88,7 @@
         <th scope="col">State</th>
         <th scope="col">ZipCode</th>
         <th scope="col">Package</th>
+        <th scope="col">Order Date</th>
         <th scope="col"></th>
         <th scope="col"></th>
         <th scope="col"></th>
@@ -97,6 +98,7 @@
     <tbody>
       <tr>
         <td>1</td>        
+        <td>Loading........</td>
         <td>Loading........</td>
         <td>Loading........</td>
         <td>Loading........</td>
@@ -153,7 +155,7 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
 function loadCustomers() {
 
 const request = new XMLHttpRequest;
-request.open("get", "https://asia-east2-unifi-customer-handler.cloudfunctions.net/api/table/verify");
+request.open("get", "https://asia-east2-unifi-customer-handler.cloudfunctions.net/api/table/install");
 request.setRequestHeader('Content-Type', 'application/json');
 request.onload = () => {
   try{
@@ -193,10 +195,11 @@ function loadTable(json){
       <td>${obj.state}</td>
       <td>${obj.zip}</td>
       <td>${obj.package}</td>
+      <td>${obj.package}</td>
       <td  style="padding: 0;"> <button onclick="backCustomer('${obj.id}');" id="back">  <i class="fas fa-arrow-left"></i> </button> </td> 
-      <td  style="padding: 0;"> <button class="" id="edit">  <i class="fas fa-edit"></i> </button> </td>        
+      <td  style="padding: 0;"> <button data-toggle="modal" data-target="#modal${obj.id}" id="edit">  <i class="fas fa-edit"></i> </button> </td>  
       <td  style="padding: 0;"> <button onclick="moveCustomer('${obj.id}');" id="next">  <i class="fas fa-arrow-right"></i> </button> </td>
-      <td  style="padding: 0;"> <button class="" id="purge">  <i class="fas fa-trash"></i> </button> </td>  
+      <td  style="padding: 0;"> <button data-toggle="modal" data-target="#purge${obj.id}" id="purge">  <i class="fas fa-trash"></i> </button> </td>  
 
       <!-- Modal Edit -->
       <div class="modal fade" id="modal${obj.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -277,7 +280,7 @@ function loadTable(json){
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button id="saveButton" type="button" data-dismiss="modal" onclick="updateCustomer('${obj.id}',${obj.count});" class="btn btn-warning">Register</button>
+              <button id="saveButton" type="button" data-dismiss="modal" onclick="updateCustomer('${obj.id}',${obj.count});" class="btn btn-warning">Update</button>
               </form>
             </div>
           </div>
@@ -287,7 +290,7 @@ function loadTable(json){
 
 
       <!-- Modal delete -->
-      <div class="modal fade" id="purge${obj.count}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal fade" id="purge${obj.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
             <div class="modal-header">
@@ -299,7 +302,7 @@ function loadTable(json){
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">cancel</button>
-              <button id="saveButton" type="button" onclick="deleteCustomer('${obj.id}');"  class="btn btn-danger">delete</button>
+              <button id="saveButton" type="button" onclick="deleteCustomer('${obj.id}');"  class="btn btn-danger" data-dismiss="modal">delete</button>
             </div>
           </div>
         </div>
@@ -308,6 +311,106 @@ function loadTable(json){
   });
 
 }
+
+//update
+function updateCustomer(custID,number) {
+        const form = {
+        name: document.getElementById('name' + number),
+        icNumber: document.getElementById('icNumber' + number),
+        email: document.getElementById('email' + number),
+        phone: document.getElementById('phone' + number),
+        address1: document.getElementById('address1' + number),
+        address2: document.getElementById('address2' + number),
+        city: document.getElementById('city' + number),
+        state: document.getElementById('state' + number),
+        zip: document.getElementById('zip' + number),
+        package: document.getElementById('package' + number)
+      };
+
+      const request = new XMLHttpRequest;
+      request.onload = () => {
+        try{
+          const json= JSON.parse(request.responseText);
+
+          loadCustomers();
+        } catch {
+          console.warn("could not load data");
+        }
+      };
+
+      request.open("put", `https://asia-east2-unifi-customer-handler.cloudfunctions.net/api/update/customer/${custID}`);
+      request.setRequestHeader('Content-Type', 'application/json');
+      request.setRequestHeader('Authorization', `Bearer ${gIdToken}`);
+      request.send(JSON.stringify({
+        name: `${form.name.value}`,
+        icNumber: `${form.icNumber.value}`,
+        email: `${form.email.value}`,
+        phone: `${form.phone.value}`,
+        address1: `${form.address1.value}`,
+        address2: `${form.address2.value}`,
+        city: `${form.city.value}`,
+        state: `${form.state.value}`,
+        zip: `${form.zip.value}`,
+        package: `${form.package.value}`
+    }));
+
+  }
+
+  function moveCustomer(id) {
+        const request = new XMLHttpRequest();
+        request.open(
+          "put",
+          `https://asia-east2-unifi-customer-handler.cloudfunctions.net/api/move/complete/${id}`
+        );
+        request.setRequestHeader("Authorization", `Bearer ${gIdToken}`);
+        request.onload = () => {
+          try {
+            const json = JSON.parse(request.responseText);
+            loadCustomers();
+          } catch {
+            console.warn("could not load data");
+          }
+        };
+        request.send();
+      }
+
+      //move customr back
+      function backCustomer(id) {
+        const request = new XMLHttpRequest();
+        request.open(
+          "put",
+          `https://asia-east2-unifi-customer-handler.cloudfunctions.net/api/move/order/${id}`
+        );
+        request.setRequestHeader("Authorization", `Bearer ${gIdToken}`);
+        request.onload = () => {
+          try {
+            const json = JSON.parse(request.responseText);
+            loadCustomers();
+          } catch {
+            console.warn("could not load data");
+          }
+        };
+        request.send();
+      }
+      //recycle
+      function deleteCustomer(id) {
+        const request = new XMLHttpRequest();
+        request.open(
+          "put",
+          `https://asia-east2-unifi-customer-handler.cloudfunctions.net/api/move/recycle/${id}`
+        );
+        request.setRequestHeader("Authorization", `Bearer ${gIdToken}`);
+        request.onload = () => {
+          try {
+            const json = JSON.parse(request.responseText);
+            loadCustomers();
+          } catch {
+            console.warn("could not load data");
+          }
+        };
+        request.send();
+      }
+
 //loads data on refresh
 document.addEventListener("DOMContentLoaded", () => {
 

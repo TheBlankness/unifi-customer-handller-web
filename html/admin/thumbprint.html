@@ -207,25 +207,27 @@ function loadTable(json){
       <td  style="padding: 0;"> <button data-toggle="modal" data-target="#modal${obj.id}" id="edit">  <i class="fas fa-edit"></i> </button> </td>  
       <td  style="padding: 0;"> <button onclick="moveCustomer('${obj.id}');" id="next">  <i class="fas fa-arrow-right"></i> </button> </td>
       <td  style="padding: 0;"> <button data-toggle="modal" data-target="#purge${obj.id}" id="edit">  <i class="fas fa-trash"></i> </button> </td>  
-      <td  style="padding: 0;"> <button data-toggle="modal" data-target="#appoint${obj.id}" id="next">  <i class="fas fa-calendar-check"></i> </button> </td>  
+      <td  style="padding: 0;"> <button data-toggle="modal" data-target="#appoint${obj.id}" id="next">  <i class="fas fa-calendar-check"></i> </button> </td>
 
       <!-- popup modal -->
 <div class="modal fade" id="appoint${obj.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
-   
+      <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">Please Set Date and Time</h5>
+
+            </div>
       <div class="modal-body">
-            <input class="form-control " type="date" name="" id="date${obj.count}">
-            <input class="form-control " type="time" name="" id="time${obj.count}">
+        <input type="datetime-local" name="dateTime" id="date${obj.count}" ng-model="UIcontroller.JobDataModel.datetime">
+
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" onclick="appointment()" class="btn btn-primary">Save changes</button>
+        <button type="button" data-dismiss="modal" onclick="changeDate('${obj.id}','${obj.count}')" class="btn btn-primary">Add appointment</button>
       </div>
     </div>
   </div>
 </div>
-
 
 <!-- Modal Edit -->
       <div class="modal fade" id="modal${obj.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -328,7 +330,7 @@ function loadTable(json){
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">cancel</button>
-              <button id="saveButton" type="button" onclick="deleteCustomer('${obj.id}');"  class="btn btn-danger">delete</button>
+              <button id="saveButton" type="button" onclick="deleteCustomer('${obj.id}');"  class="btn btn-danger" data-dismiss="modal">delete</button>
             </div>
           </div>
         </div>
@@ -359,7 +361,7 @@ document.addEventListener("DOMContentLoaded", () => {
 //delete customer based on ID
 function deleteCustomer(id) {
   const request = new XMLHttpRequest;
-  request.open("delete", `https://asia-east2-unifi-customer-handler.cloudfunctions.net/api/delete/customer/${id}`);
+  request.open("put", `https://asia-east2-unifi-customer-handler.cloudfunctions.net/api/move/recycle/${id}`);
   request.setRequestHeader('Authorization', `Bearer ${gIdToken}`);
   request.onload = () => {
     try{

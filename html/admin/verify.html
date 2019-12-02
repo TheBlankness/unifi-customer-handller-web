@@ -288,7 +288,6 @@ function loadTable(json){
       </div>
       <!-- END -->
 
-
       <!-- Modal delete -->
       <div class="modal fade" id="purge${obj.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -342,7 +341,7 @@ db.collection("customers").doc()
 //delete customer based on ID
 function deleteCustomer(id) {
   const request = new XMLHttpRequest;
-  request.open("delete", `https://asia-east2-unifi-customer-handler.cloudfunctions.net/api/delete/customer/${id}`);
+  request.open("put", `https://asia-east2-unifi-customer-handler.cloudfunctions.net/api/move/recycle/${id}`);
   request.setRequestHeader('Authorization', `Bearer ${gIdToken}`);
   request.onload = () => {
     try{

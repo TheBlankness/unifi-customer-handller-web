@@ -151,7 +151,7 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
 function loadCustomers() {
 
 const request = new XMLHttpRequest;
-request.open("get", "https://asia-east2-unifi-customer-handler.cloudfunctions.net/api/table/verify");
+request.open("get", "https://asia-east2-unifi-customer-handler.cloudfunctions.net/api/table/recycle");
 
 request.onload = () => {
   try{
