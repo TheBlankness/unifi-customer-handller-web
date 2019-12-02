@@ -13,6 +13,7 @@
 <!-- Firebase SDK -->
 <script src="https://www.gstatic.com/firebasejs/7.4.0/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/6.1.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/6.1.1/firebase-firestore.js"></script>
 
   <!-- Bootstrap core CSS -->
   <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -181,7 +182,7 @@ function loadTable(json){
   json.forEach((obj) => {
       const row = customerTable.insertRow(-1)
     row.innerHTML = ` 
-    <td>${obj.count}</td>
+      <td>${obj.count}</td>
       <td>${obj.name}</td>
       <td>${obj.icNumber}</td>
       <td>${obj.email}</td>
@@ -193,9 +194,9 @@ function loadTable(json){
       <td>${obj.zip}</td>
       <td>${obj.package}</td>
       <td  style="padding: 0;"> <button onclick="backCustomer('${obj.id}');" id="back">  <i class="fas fa-arrow-left"></i> </button> </td> 
-      <td  style="padding: 0;"> <button class="" id="edit">  <i class="fas fa-edit"></i> </button> </td>        
+      <td  style="padding: 0;"> <button data-toggle="modal" data-target="#modal${obj.id}" id="edit">  <i class="fas fa-edit"></i> </button> </td>  
       <td  style="padding: 0;"> <button onclick="moveCustomer('${obj.id}');" id="next">  <i class="fas fa-arrow-right"></i> </button> </td>
-      <td  style="padding: 0;"> <button class="" id="purge">  <i class="fas fa-trash"></i> </button> </td>  
+      <td  style="padding: 0;"> <button data-toggle="modal" data-target="#purge${obj.id}" id="edit">  <i class="fas fa-trash"></i> </button> </td>  
 
       <!-- Modal Edit -->
       <div class="modal fade" id="modal${obj.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">

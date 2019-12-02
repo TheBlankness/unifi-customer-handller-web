@@ -11,6 +11,7 @@
 <!-- Firebase SDK -->
 <script src="https://www.gstatic.com/firebasejs/7.4.0/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/6.1.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/6.1.1/firebase-firestore.js"></script>
 
   <!-- Bootstrap core CSS -->
   <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -203,11 +204,13 @@ function loadTable(json){
       <td>${obj.package}</td>
       <td>${obj.date}</td>
       <td  style="padding: 0;"> <button onclick="backCustomer('${obj.id}');" id="back">  <i class="fas fa-arrow-left"></i> </button> </td> 
-      <td  style="padding: 0;"> <button onclick="deleteCustomer('${obj.id}');" id="purge">  <i class="fas fa-trash"></i> </button> </td>             
+      <td  style="padding: 0;"> <button data-toggle="modal" data-target="#modal${obj.id}" id="edit">  <i class="fas fa-edit"></i> </button> </td>  
       <td  style="padding: 0;"> <button onclick="moveCustomer('${obj.id}');" id="next">  <i class="fas fa-arrow-right"></i> </button> </td>
-      <td  style="padding: 0;"> <button data-toggle="modal" data-target="#modal${obj.id}" id="next">  <i class="fas fa-calendar-check"></i> </button> </td>  
+      <td  style="padding: 0;"> <button data-toggle="modal" data-target="#purge${obj.id}" id="edit">  <i class="fas fa-trash"></i> </button> </td>  
+      <td  style="padding: 0;"> <button data-toggle="modal" data-target="#appoint${obj.id}" id="next">  <i class="fas fa-calendar-check"></i> </button> </td>  
+
       <!-- popup modal -->
-<div class="modal fade" id="modal${obj.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal fade" id="appoint${obj.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
    
@@ -222,6 +225,114 @@ function loadTable(json){
     </div>
   </div>
 </div>
+
+
+<!-- Modal Edit -->
+      <div class="modal fade" id="modal${obj.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-body">
+                <div class="form-row">
+                  <form>
+                    <div class="form-group col-md-9">
+                      <label for="name">Name</label>
+                      <input type="text" class="form-control" id="name${obj.count}" value="${obj.name}">
+                    </div>
+                    <div class="form-group col-md-3">
+                      <label for="ic">IC number</label>
+                      <input type="text" class="form-control" id="icNumber${obj.count}" value="${obj.icNumber}">
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group col-md-6">
+                      <label for="name">Email address</label>
+                      <input type="email" class="form-control" id="email${obj.count}" value="${obj.email}">
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label for="ic">Phone number</label>
+                      <input type="text" class="form-control" id="phone${obj.count}" value="${obj.phone}">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="address1">Address Line 1</label>
+                    <input type="text" class="form-control" id="address1${obj.count}" value="${obj.address1}">
+                  </div>
+                  <div class="form-group">
+                    <label for="address2">Address Line 2</label>
+                    <input type="text" class="form-control" id="address2${obj.count}" value="${obj.address2}">
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group col-md-6">
+                      <label for="city">City</label>
+                      <input type="text" class="form-control" id="city${obj.count}" value="${obj.city}">
+                    </div>
+                    <div class="form-group col-md-4">
+                      <label for="state">State</label>
+                      <select id="state${obj.count}" class="form-control">
+                          <option disabled selected value="${obj.state}">${obj.state}</option>
+                <option value="Kuala Lumpur">Kuala Lumpur</option>
+                <option value="Johor">Johor</option>
+                <option value="Melaka">Melaka</option>
+                <option value="Negeri Sembilan">Negeri Sembilan</option>
+                <option value="Pahang">Pahang</option>
+                <option value="Selangor">Selangor</option>
+                <option value="Kelantan">Kelantan</option>
+                <option value="Terengganu">Terengganu</option>
+                <option value="Perak">Perak</option>
+                <option value="Kedah">Kedah</option>
+                <option value="Pulau Pinang">Pulau Pinang</option>
+                <option value="Perlis">Perlis</option>
+                      </select>
+                    </div>
+                    <div class="form-group col-md-2">
+                      <label for="zip">ZipCode</label>
+                      <input type="text" class="form-control" id="zip${obj.count}" value="${obj.zip}">
+                    </div>
+                  </div>
+                  <div class="form-group col-md-13">
+                      <label for="state">Package</label>
+                      <select id="package${obj.count}" class="form-control" >
+                          <option disabled selected value="${obj.package}">${obj.package}</option>
+                  <option value="89">Unifi Home: RM89/month</option>
+                  <option value="99">Unifi Home: RM99/month</option>
+                  <option value="129">Unifi Home: RM129/month</option>
+                  <option value="159">Unifi Home: RM159/month</option>
+                  <option value="199">Unifi Home: RM199/month</option>
+                  <option value="139">Unifi Biz: RM139/month</option>
+                  <option value="249">Unifi Biz: RM249/month</option>
+                  <option value="349">Unifi Biz: RM349/month</option>
+                      </select>
+                    </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button id="saveButton" type="button" data-dismiss="modal" onclick="updateCustomer('${obj.id}',${obj.count});" class="btn btn-warning">Update</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- END -->
+
+
+      <!-- Modal delete -->
+      <div class="modal fade" id="purge${obj.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">This Cannot Be Undone</h5>
+
+            </div>
+            <div class="modal-body">
+                Confirm delete?
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">cancel</button>
+              <button id="saveButton" type="button" onclick="deleteCustomer('${obj.id}');"  class="btn btn-danger">delete</button>
+            </div>
+          </div>
+        </div>
+      </div>
       `;
   });
 
@@ -290,6 +401,49 @@ function backCustomer(id) {
     }
   };
   request.send();
+}
+
+function updateCustomer(custID,number) {
+  const form = {
+      name: document.getElementById('name' + number),
+      icNumber: document.getElementById('icNumber' + number),
+      email: document.getElementById('email' + number),
+      phone: document.getElementById('phone' + number),
+      address1: document.getElementById('address1' + number),
+      address2: document.getElementById('address2' + number),
+      city: document.getElementById('city' + number),
+      state: document.getElementById('state' + number),
+      zip: document.getElementById('zip' + number),
+      package: document.getElementById('package' + number)
+    };
+
+  const request = new XMLHttpRequest;
+  request.onload = () => {
+    try{
+      const json= JSON.parse(request.responseText);
+
+      loadCustomers();
+    } catch {
+      console.warn("could not load data");
+    }
+  };
+
+  request.open("put", `https://asia-east2-unifi-customer-handler.cloudfunctions.net/api/update/customer/${custID}`);
+  request.setRequestHeader('Content-Type', 'application/json');
+  request.setRequestHeader('Authorization', `Bearer ${gIdToken}`);
+  request.send(JSON.stringify({
+    name: `${form.name.value}`,
+    icNumber: `${form.icNumber.value}`,
+    email: `${form.email.value}`,
+    phone: `${form.phone.value}`,
+    address1: `${form.address1.value}`,
+    address2: `${form.address2.value}`,
+    city: `${form.city.value}`,
+    state: `${form.state.value}`,
+    zip: `${form.zip.value}`,
+    package: `${form.package.value}`
+}));
+
 }
 
   </script>
