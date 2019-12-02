@@ -196,7 +196,7 @@ function loadTable(json){
       <td  style="padding: 0;"> <button onclick="backCustomer('${obj.id}');" id="back">  <i class="fas fa-arrow-left"></i> </button> </td> 
       <td  style="padding: 0;"> <button data-toggle="modal" data-target="#modal${obj.id}" id="edit">  <i class="fas fa-edit"></i> </button> </td>  
       <td  style="padding: 0;"> <button onclick="moveCustomer('${obj.id}');" id="next">  <i class="fas fa-arrow-right"></i> </button> </td>
-      <td  style="padding: 0;"> <button data-toggle="modal" data-target="#purge${obj.id}" id="edit">  <i class="fas fa-trash"></i> </button> </td>  
+      <td  style="padding: 0;"> <button data-toggle="modal" data-target="#purge${obj.id}" id="purge">  <i class="fas fa-trash"></i> </button> </td>  
 
       <!-- Modal Edit -->
       <div class="modal fade" id="modal${obj.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -299,7 +299,7 @@ function loadTable(json){
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">cancel</button>
-              <button id="saveButton" type="button" onclick="deleteCustomer('${obj.id}');"  class="btn btn-danger">delete</button>
+              <button id="saveButton" type="button" onclick="deleteCustomer('${obj.id}');"  class="btn btn-danger" data-dismiss="modal">delete</button>
             </div>
           </div>
         </div>
