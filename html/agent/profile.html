@@ -167,7 +167,7 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
 
 var gIdToken = "";
 
-function loadCustomers() {
+function loadCustomers() {  
 
   const request = new XMLHttpRequest;
   request.open("get", "https://asia-east2-unifi-customer-handler.cloudfunctions.net/api/agent/completed/customers");

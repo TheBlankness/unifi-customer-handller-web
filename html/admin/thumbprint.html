@@ -205,9 +205,26 @@ function loadTable(json){
       <td>${obj.appointmentDate}</td>
       <td  style="padding: 0;"> <button onclick="backCustomer('${obj.id}');" id="back">  <i class="fas fa-arrow-left"></i> </button> </td> 
       <td  style="padding: 0;"> <button data-toggle="modal" data-target="#modal${obj.id}" id="edit">  <i class="fas fa-edit"></i> </button> </td>  
-      <td  style="padding: 0;"> <button onclick="moveCustomer('${obj.id}');" id="next">  <i class="fas fa-arrow-right"></i> </button> </td>
+      <td  style="padding: 0;"> <button data-toggle="modal" data-target="#formID${obj.id}" id="next">  <i class="fas fa-arrow-right"></i> </button> </td>  
       <td  style="padding: 0;"> <button data-toggle="modal" data-target="#purge${obj.id}" id="edit">  <i class="fas fa-trash"></i> </button> </td>  
       <td  style="padding: 0;"> <button data-toggle="modal" data-target="#appoint${obj.id}" id="next">  <i class="fas fa-calendar-check"></i> </button> </td>
+
+      <!-- popup formID date -->
+<div class="modal fade" id="formID${obj.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">Enter e-form ID</h5>
+            </div>
+      <div class="modal-body">
+        <input type="text" class="form-group col-md-12" name="formID" id="formID${obj.count}" n>
+      </div>
+      <div class="modal-footer">
+        <button type="button" data-dismiss="modal" onclick="nextCustomer('${obj.id}')" class="btn btn-warning"><i class="fas fa-arrow-right"></i></button>
+      </div>
+    </div>
+  </div>
+</div>
 
       <!-- popup appointment date -->
 <div class="modal fade" id="appoint${obj.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
