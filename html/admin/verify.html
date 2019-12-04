@@ -1,189 +1,217 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content="unifi" />
+    <meta name="author" content="" />
 
-<head>
+    <title>YCOM Admin</title>
 
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="unifi">
-  <meta name="author" content="">
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/7.4.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.1.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.1.1/firebase-firestore.js"></script>
 
-  <title>YCOM Admin</title>
+    <!-- Bootstrap core CSS -->
+    <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
 
-<!-- Firebase SDK -->
-<script src="https://www.gstatic.com/firebasejs/7.4.0/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/6.1.1/firebase-auth.js"></script>
-<script src="https://www.gstatic.com/firebasejs/6.1.1/firebase-firestore.js"></script>
+    <!-- Custom fonts for this template -->
+    <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" />
+    <link
+      href="../vendor/simple-line-icons/css/simple-line-icons.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic"
+      rel="stylesheet"
+      type="text/css"
+    />
 
-  <!-- Bootstrap core CSS -->
-  <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="../css/landing-page.css" rel="stylesheet" />
 
-  <!-- Custom fonts for this template -->
-  <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
-  <link href="../vendor/simple-line-icons/css/simple-line-icons.css" rel="stylesheet" type="text/css">
-  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+  </head>
 
-  <!-- Custom styles for this template -->
-  <link href="../css/landing-page.css" rel="stylesheet">
-
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-</head>
-
-<body>
-
-  <!-- Navigation -->
-  <nav class="navbar navbar-expand-lg " id="boren">
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg " id="boren">
       <div class="container">
         <a class="navbar-brand" href="#">
-        <h4 class="hitam">YCOM ADMIN</h4> 
+          <h4 class="hitam">YCOM ADMIN</h4>
         </a>
 
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample07" aria-controls="navbarsExample07"
-         aria-expanded="false" aria-label="Toggle navigation" >
-            <span class="icon-menu "></span>
-          </button>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarsExample07"
+          aria-controls="navbarsExample07"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="icon-menu "></span>
+        </button>
 
-          <div class="navbar-collapse collapse" id="navbarsExample07" >
-              <ul class="navbar navbar-nav navbar-right ml-auto">
-                <li class="nav-item">
-                  <a class="nav-link " id="pilih" href="#">VERIFY</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link navi"  href="thumbprint.html">THUMBPRINT</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link navi "  href="order.html">ORDER</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link navi"  href="installation.html">INSTALLATION</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link navi "  href="complete.html">COMPLETE</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link navi nav_icon"  href="recycle.html"> <i class="fas fa-trash"></i> </a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link nav_icon" onclick="logout()" href="#"><i class="fas fa-sign-out-alt"></i></a>
-                  </li>
-              </ul>
-            </div>
+        <div class="navbar-collapse collapse" id="navbarsExample07">
+          <ul class="navbar navbar-nav navbar-right ml-auto">
+            <li class="nav-item">
+              <a class="nav-link " id="pilih" href="#">VERIFY</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link navi" href="thumbprint.html">THUMBPRINT</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link navi " href="order.html">ORDER</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link navi" href="installation.html">INSTALLATION</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link navi " href="complete.html">COMPLETE</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link navi nav_icon" href="recycle.html">
+                <i class="fas fa-trash"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link nav_icon" onclick="logout()" href="#"
+                ><i class="fas fa-sign-out-alt"></i
+              ></a>
+            </li>
+          </ul>
+        </div>
       </div>
     </nav>
 
-  <section class="small-container" >
-    <br><h2 class="text-center">Verification process</h2><br>
+    <section class="small-container">
+      <br />
+      <h2 class="text-center">Verification process</h2>
+      <br />
       <p class="company">Branch ID: RSSL284</p>
       <p class="company">Partner Code: RSSL284AA</p>
 
-    <table class="table " id="customerTable">
+      <table class="table " id="customerTable">
         <thead>
-            <tr>
-        <th scope="col">#</th>
-        <th scope="col">Name</th>
-        <th scope="col">IC number</th>
-        <th scope="col">Email</th>
-        <th scope="col">Phone</th>
-        <th scope="col">Address Line 1</th>
-        <th scope="col">Address Line 2</th>
-        <th scope="col">City</th>
-        <th scope="col">State</th>
-        <th scope="col">ZipCode</th>
-        <th scope="col">Package</th>
-        <th scope="col">Agent</th>
-        <th scope="col"></th>
-        <th scope="col"></th>
-        <th scope="col"></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>1</td>        
-        <td>Loading........</td>
-        <td>Loading........</td>
-        <td>Loading........</td>
-        <td>Loading........</td>
-        <td>Loading........</td>
-        <td>Loading........</td>
-        <td>Loading........</td>
-        <td>Loading........</td>
-        <td>Loading........</td>
-        <td>Loading........</td>
-        <td>Loading........</td>
-        <td  style="padding: 0;"> <button class="" id="next">  <i class="fas fa-edit"></i> </button> </td>    
-        <td  style="padding: 0;"> <button class="" id="next">  <i class="fas fa-arrow-right"></i> </button> </td>        
-        <td  style="padding: 0;"> <button class="" id="purge">  <i class="fas fa-trash"></i> </button> </td>        
-      </tr>
-    
-    </tbody>
-  </table>
-  </section>
-  <!-- Bootstrap core JavaScript -->
-  <script src="../vendor/jquery/jquery.min.js"></script>
-  <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script>
-   var firebaseConfig = {
-    apiKey: "AIzaSyBV9rQNhxkKV6a62CDgKU2IiatGxV_572Q",
-    authDomain: "unifi-customer-handler.firebaseapp.com",
-    databaseURL: "https://unifi-customer-handler.firebaseio.com",
-    projectId: "unifi-customer-handler",
-    storageBucket: "unifi-customer-handler.appspot.com",
-    messagingSenderId: "126635632868",
-    appId: "1:126635632868:web:d2c7f9bc8b699759f124f1",
-    measurementId: "G-7PE19PG761"
-  };
-  // Initialize Firebase
-  var app = firebase.initializeApp(firebaseConfig);
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">IC number</th>
+            <th scope="col">Email</th>
+            <th scope="col">Phone</th>
+            <th scope="col">Address Line 1</th>
+            <th scope="col">Address Line 2</th>
+            <th scope="col">City</th>
+            <th scope="col">State</th>
+            <th scope="col">ZipCode</th>
+            <th scope="col">Package</th>
+            <th scope="col">Agent</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Loading........</td>
+            <td>Loading........</td>
+            <td>Loading........</td>
+            <td>Loading........</td>
+            <td>Loading........</td>
+            <td>Loading........</td>
+            <td>Loading........</td>
+            <td>Loading........</td>
+            <td>Loading........</td>
+            <td>Loading........</td>
+            <td>Loading........</td>
+            <td style="padding: 0;">
+              <button class="" id="next"><i class="fas fa-edit"></i></button>
+            </td>
+            <td style="padding: 0;">
+              <button class="" id="next">
+                <i class="fas fa-arrow-right"></i>
+              </button>
+            </td>
+            <td style="padding: 0;">
+              <button class="" id="purge"><i class="fas fa-trash"></i></button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+    <!-- Bootstrap core JavaScript -->
+    <script src="../vendor/jquery/jquery.min.js"></script>
+    <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script>
+      var firebaseConfig = {
+        apiKey: "AIzaSyBV9rQNhxkKV6a62CDgKU2IiatGxV_572Q",
+        authDomain: "unifi-customer-handler.firebaseapp.com",
+        databaseURL: "https://unifi-customer-handler.firebaseio.com",
+        projectId: "unifi-customer-handler",
+        storageBucket: "unifi-customer-handler.appspot.com",
+        messagingSenderId: "126635632868",
+        appId: "1:126635632868:web:d2c7f9bc8b699759f124f1",
+        measurementId: "G-7PE19PG761"
+      };
+      // Initialize Firebase
+      var app = firebase.initializeApp(firebaseConfig);
 
-  var db = firebase.firestore(app);
+      var db = firebase.firestore(app);
 
-  function logout(){
-  firebase.auth().signOut();
-}
+      function logout() {
+        firebase.auth().signOut();
+      }
 
-var gIdToken ="";
+      var gIdToken = "";
 
-firebase.auth().onAuthStateChanged(firebaseUser => {
-   
-   if(firebaseUser){
-   
-   }else{
-      window.location.replace("../index.html");
-   }
-})
+      firebase.auth().onAuthStateChanged(firebaseUser => {
+        if (firebaseUser) {
+        } else {
+          window.location.replace("../index.html");
+        }
+      });
 
-function loadCustomers() {
+      function loadCustomers() {
+        const request = new XMLHttpRequest();
+        request.open(
+          "get",
+          "https://asia-east2-unifi-customer-handler.cloudfunctions.net/api/table/verify"
+        );
 
-const request = new XMLHttpRequest;
-request.open("get", "https://asia-east2-unifi-customer-handler.cloudfunctions.net/api/table/verify");
+        request.onload = () => {
+          try {
+            const json = JSON.parse(request.responseText);
+            loadTable(json);
+          } catch {
+            console.warn("could not load data");
+          }
+        };
+        request.setRequestHeader("Authorization", `Bearer ${gIdToken}`);
+        request.send();
+      }
 
-request.onload = () => {
-  try{
-    const json= JSON.parse(request.responseText);
-    loadTable(json);
-  } catch {
-    console.warn("could not load data");
-  }
-};
-  request.setRequestHeader('Authorization', `Bearer ${gIdToken}`);
-  request.send();
+      const customerTable = document.querySelector("#customerTable > tbody");
 
-      
-    }
+      function loadTable(json) {
+        //clear data
+        while (customerTable.firstChild) {
+          customerTable.removeChild(customerTable.firstChild);
+        }
 
-
-const customerTable = document.querySelector("#customerTable > tbody")
-
-function loadTable(json){
-  //clear data
-  while(customerTable.firstChild){
-    customerTable.removeChild(customerTable.firstChild);
-  }
-
-  //populate data
-  json.forEach((obj) => {
-      const row = customerTable.insertRow(-1)
-    row.innerHTML = ` 
+        //populate data
+        json.forEach(obj => {
+          const row = customerTable.insertRow(-1);
+          row.innerHTML = ` 
     <td>${obj.count}</td>
       <td>${obj.name}</td>
       <td>${obj.icNumber}</td>
@@ -195,7 +223,7 @@ function loadTable(json){
       <td>${obj.state}</td>
       <td>${obj.zip}</td>
       <td>${obj.package}</td>
-      <td>${obj.package}</td>
+      <td>${obj.agent}</td>
 
       <td  style="padding: 0;"> <button data-toggle="modal" data-target="#modal${obj.id}" id="edit">  <i class="fas fa-edit"></i> </button> </td>  
       <td  style="padding: 0;"> <button onclick="moveCustomer('${obj.id}');" id="next">  <i class="fas fa-arrow-right"></i> </button> </td>
@@ -307,114 +335,121 @@ function loadTable(json){
         </div>
       </div>
     `;
-  });
+        });
+      }
+      //loads data on refresh
+      document.addEventListener("DOMContentLoaded", () => {
+        firebase.auth().onAuthStateChanged(firebaseUser => {
+          if (firebaseUser) {
+            firebase
+              .auth()
+              .currentUser.getIdToken(/* forceRefresh */ true)
+              .then(function(idToken) {
+                gIdToken = idToken;
 
-}
-//loads data on refresh
-document.addEventListener("DOMContentLoaded", () => {
+                loadCustomers();
+              })
+              .catch(function(error) {
+                // Handle error
+              });
+          } else {
+            window.location.replace("../index.html");
+          }
+        });
+      });
 
-  firebase.auth().onAuthStateChanged(firebaseUser => {
-   
-   if(firebaseUser){
-    firebase.auth().currentUser.getIdToken(/* forceRefresh */ true).then(function(idToken) {
-      gIdToken=idToken;
-      
-      loadCustomers();
-}).catch(function(error) {
-  // Handle error
-});
-   }else{
-      window.location.replace("../index.html");
-   }
-})
+      db.collection("customers")
+        .doc()
+        .onSnapshot(function(doc) {
+          loadCustomers();
+          console.log("Current data: ", doc.data());
+        });
 
-  
-  
-});
+      //delete customer based on ID
+      function deleteCustomer(id) {
+        const request = new XMLHttpRequest();
+        request.open(
+          "put",
+          `https://asia-east2-unifi-customer-handler.cloudfunctions.net/api/move/recycle/${id}`
+        );
+        request.setRequestHeader("Authorization", `Bearer ${gIdToken}`);
+        request.onload = () => {
+          try {
+            const json = JSON.parse(request.responseText);
+            loadCustomers();
+          } catch {
+            console.warn("could not load data");
+          }
+        };
+        request.send();
+      }
 
-db.collection("customers").doc()
-    .onSnapshot(function(doc) {
-      loadCustomers();
-        console.log("Current data: ", doc.data());
-    });
+      //update customer
+      function updateCustomer(custID, number) {
+        const form = {
+          name: document.getElementById("name" + number),
+          icNumber: document.getElementById("icNumber" + number),
+          email: document.getElementById("email" + number),
+          phone: document.getElementById("phone" + number),
+          address1: document.getElementById("address1" + number),
+          address2: document.getElementById("address2" + number),
+          city: document.getElementById("city" + number),
+          state: document.getElementById("state" + number),
+          zip: document.getElementById("zip" + number),
+          package: document.getElementById("package" + number)
+        };
 
-//delete customer based on ID
-function deleteCustomer(id) {
-  const request = new XMLHttpRequest;
-  request.open("put", `https://asia-east2-unifi-customer-handler.cloudfunctions.net/api/move/recycle/${id}`);
-  request.setRequestHeader('Authorization', `Bearer ${gIdToken}`);
-  request.onload = () => {
-    try{
-      const json= JSON.parse(request.responseText);
-      loadCustomers();
-    } catch {
-      console.warn("could not load data");
-    }
-  };
-  request.send();
-}
+        const request = new XMLHttpRequest();
+        request.onload = () => {
+          try {
+            const json = JSON.parse(request.responseText);
 
-//update customer
-function updateCustomer(custID,number) {
-  const form = {
-      name: document.getElementById('name' + number),
-      icNumber: document.getElementById('icNumber' + number),
-      email: document.getElementById('email' + number),
-      phone: document.getElementById('phone' + number),
-      address1: document.getElementById('address1' + number),
-      address2: document.getElementById('address2' + number),
-      city: document.getElementById('city' + number),
-      state: document.getElementById('state' + number),
-      zip: document.getElementById('zip' + number),
-      package: document.getElementById('package' + number)
-    };
+            loadCustomers();
+          } catch {
+            console.warn("could not load data");
+          }
+        };
 
-  const request = new XMLHttpRequest;
-  request.onload = () => {
-    try{
-      const json= JSON.parse(request.responseText);
+        request.open(
+          "put",
+          `https://asia-east2-unifi-customer-handler.cloudfunctions.net/api/update/customer/${custID}`
+        );
+        request.setRequestHeader("Content-Type", "application/json");
+        request.setRequestHeader("Authorization", `Bearer ${gIdToken}`);
+        request.send(
+          JSON.stringify({
+            name: `${form.name.value}`,
+            icNumber: `${form.icNumber.value}`,
+            email: `${form.email.value}`,
+            phone: `${form.phone.value}`,
+            address1: `${form.address1.value}`,
+            address2: `${form.address2.value}`,
+            city: `${form.city.value}`,
+            state: `${form.state.value}`,
+            zip: `${form.zip.value}`,
+            package: `${form.package.value}`
+          })
+        );
+      }
 
-      loadCustomers();
-    } catch {
-      console.warn("could not load data");
-    }
-  };
-
-  request.open("put", `https://asia-east2-unifi-customer-handler.cloudfunctions.net/api/update/customer/${custID}`);
-  request.setRequestHeader('Content-Type', 'application/json');
-  request.setRequestHeader('Authorization', `Bearer ${gIdToken}`);
-  request.send(JSON.stringify({
-    name: `${form.name.value}`,
-    icNumber: `${form.icNumber.value}`,
-    email: `${form.email.value}`,
-    phone: `${form.phone.value}`,
-    address1: `${form.address1.value}`,
-    address2: `${form.address2.value}`,
-    city: `${form.city.value}`,
-    state: `${form.state.value}`,
-    zip: `${form.zip.value}`,
-    package: `${form.package.value}`
-}));
-
-}
-
-//move Customer
-function moveCustomer(id) {
-  const request = new XMLHttpRequest;
-  request.open("put", `https://asia-east2-unifi-customer-handler.cloudfunctions.net/api/move/thumbprint/${id}`);
-  request.setRequestHeader('Authorization', `Bearer ${gIdToken}`);
-  request.onload = () => {
-    try{
-      const json= JSON.parse(request.responseText);
-      loadCustomers();
-    } catch {
-      console.warn("could not load data");
-    }
-  };
-  request.send();
-}
-
-  </script>
-</body>
-
+      //move Customer
+      function moveCustomer(id) {
+        const request = new XMLHttpRequest();
+        request.open(
+          "put",
+          `https://asia-east2-unifi-customer-handler.cloudfunctions.net/api/move/thumbprint/${id}`
+        );
+        request.setRequestHeader("Authorization", `Bearer ${gIdToken}`);
+        request.onload = () => {
+          try {
+            const json = JSON.parse(request.responseText);
+            loadCustomers();
+          } catch {
+            console.warn("could not load data");
+          }
+        };
+        request.send();
+      }
+    </script>
+  </body>
 </html>
