@@ -74,7 +74,7 @@
     <br><h2 class="text-center">Waiting for installation</h2><br> 
     <p class="company">Branch ID: RSSL284</p>
     <p class="company">Partner Code: RSSL284AA</p>
-    <table class="table " id="customerTable">
+    <table class="table table-hover" id="customerTable">
         <thead>
             <tr>
         <th scope="col">#</th>
@@ -89,6 +89,8 @@
         <th scope="col">ZipCode</th>
         <th scope="col">Package</th>
         <th scope="col">Order Date</th>
+        <th scope="col">Install Date</th>
+        <th scope="col"></th>
         <th scope="col"></th>
         <th scope="col"></th>
         <th scope="col"></th>
@@ -109,10 +111,12 @@
         <td>Loading........</td>
         <td>Loading........</td>
         <td>Loading........</td>
+        <td>Loading........</td>
         <td  style="padding: 0;"> <button class="" id="next">  <i class="fas fa-arrow-left"></i> </button> </td>        
         <td  style="padding: 0;"> <button class="" id="next">  <i class="fas fa-edit"></i> </button> </td>    
         <td  style="padding: 0;"> <button class="" id="next">  <i class="fas fa-arrow-right"></i> </button> </td>        
-        <td  style="padding: 0;"> <button class="" id="next">  <i class="fas fa-trash"></i> </button> </td>     
+        <td  style="padding: 0;"> <button class="" id="next">  <i class="fas fa-trash"></i> </button> </td>
+        <td  style="padding: 0;"> <button class="" id="next">  <i class="fas fa-tools"></i> </button> </td>     
       </tr>
     </tbody>
   </table>
@@ -196,10 +200,29 @@ function loadTable(json){
       <td>${obj.zip}</td>
       <td>${obj.package}</td>
       <td>${obj.orderDate}</td>
+      <td>${obj.installDate}</td>
       <td  style="padding: 0;"> <button onclick="backCustomer('${obj.id}');" id="back">  <i class="fas fa-arrow-left"></i> </button> </td> 
       <td  style="padding: 0;"> <button data-toggle="modal" data-target="#modal${obj.id}" id="edit">  <i class="fas fa-edit"></i> </button> </td>  
       <td  style="padding: 0;"> <button onclick="moveCustomer('${obj.id}');" id="next">  <i class="fas fa-arrow-right"></i> </button> </td>
       <td  style="padding: 0;"> <button data-toggle="modal" data-target="#purge${obj.id}" id="purge">  <i class="fas fa-trash"></i> </button> </td>  
+      <td  style="padding: 0;"> <button data-toggle="modal" data-target="#installDate${obj.id}" id="next">  <i class="fas fa-tools"></i> </button> </td>
+
+      <!-- popup formID date -->
+<div class="modal fade" id="installDate${obj.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">Enter Installation Date</h5>
+            </div>
+      <div class="modal-body">
+        <input type="date" class="form-group col-md-12" name="installDate" id="installDate${obj.count}" n>
+      </div>
+      <div class="modal-footer">
+        <button type="button" data-dismiss="modal" onclick="nextCustomer('${obj.id}')" class="btn btn-warning">Set Install Date</button>
+      </div>
+    </div>
+  </div>
+</div>
 
       <!-- Modal Edit -->
       <div class="modal fade" id="modal${obj.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
