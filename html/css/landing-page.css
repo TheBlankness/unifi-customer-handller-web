@@ -312,3 +312,14 @@ th{
   margin-left: 10px;
   border-bottom: 1px solid black
 }
+
+.password{
+  background: white;
+  border: 1px solid black;
+  border-radius: 15px;
+} 
+.password:hover{
+  background: #ffa500;
+  border: 1px solid #ffa500;
+  color: #000;
+}

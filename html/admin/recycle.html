@@ -107,8 +107,8 @@
         <td>Loading........</td>
         <td>Loading........</td>
         <td>Loading........</td>
-        <td  style="padding: 0;"> <button class="" id="next">  <i class="fas fa-recycle"></i> </button> </td>    
-        <td  style="padding: 0;"> <button class="" id="purge">  <i class="fas fa-trash"></i> </button> </td>        
+        <td  style="padding: 0;"> <button class="" id="next">  <i class="fas fa-recycle"></i> </button> </td>  
+        <td  style="padding: 0;"> <button class="" id="purge">  <i class="fas fa-trash"></i> </button> </td>    
       </tr>
     
     </tbody>
@@ -192,7 +192,7 @@ function loadTable(json){
       <td>${obj.zip}</td>
       <td>${obj.package}</td>
       <td  style="padding: 0;"> <button onclick="restoreCustomer('${obj.id}');" id="next">  <i class="fas fa-recycle"></i> </button> </td>
-      <td  style="padding: 0;"> <button onclick="deleteCustomer('${obj.id}');" id="purge">  <i class="fas fa-trash"></i> </button> </td>             
+      <td  style="padding: 0;"> <button data-toggle="modal" data-target="#purge${obj.id}" id="purge">  <i class="fas fa-trash"></i> </button> </td>  
       <!-- Modal -->
       <div class="modal fade" id="modal${obj.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -274,6 +274,25 @@ function loadTable(json){
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
               <button id="saveButton" type="button" data-dismiss="modal" onclick="updateCustomer('${obj.id}',${obj.count});" class="btn btn-warning">Register</button>
               </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal delete -->
+      <div class="modal fade" id="purge${obj.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">This Cannot Be Undone</h5>
+
+            </div>
+            <div class="modal-body">
+                Confirm delete?
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">cancel</button>
+              <button id="saveButton" type="button" onclick="deleteCustomer('${obj.id}');"  class="btn btn-danger" data-dismiss="modal">delete</button>
             </div>
           </div>
         </div>

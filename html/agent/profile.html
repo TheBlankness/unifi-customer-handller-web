@@ -84,8 +84,8 @@
                   <td rowspan="2" style="padding-left: 300px;"><h1>Customer: 7</h1></td>
                 </tr>
                 <tr>
-                    <td>password</td>
-                    <td><button style="" >change password</button></td>
+                    <td></td>
+                    <td><button class="password" data-toggle="modal" data-target="#password${obj.id}" id="password"> change password </button></td>
                   </tr>
 
           </table>
@@ -222,6 +222,31 @@ function loadTable(json){
       <td>${obj.state}</td>
       <td>${obj.zip}</td>
       <td>${obj.package}</td>
+
+      <!-- Modal password -->
+      <div class="modal fade" id="password${obj.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">This Cannot Be Undone</h5>
+
+            </div>
+            <div class="modal-body">
+                Enter email address to change password
+                <input type="email" class="form-group col-md-12" name="email" id="email${obj.count}">
+            </div>
+            <div class="modal-footer">
+              <button id="saveButton" type="button" onclick="deleteCustomer('${obj.id}');"  class="btn btn-warning" data-dismiss="modal">Reset password</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--email body -->
+      <h2> YCOM unifi System </h2>
+      <hr>
+      <p> to change you rpassword please click the following link </p>
+      <a href=""> the damn link </a>
     `;
   });
 
