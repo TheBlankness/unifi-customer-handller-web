@@ -228,25 +228,27 @@ function loadTable(json){
         <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLongTitle">This Cannot Be Undone</h5>
+              <h5 class="modal-title" id="exampleModalLongTitle">Change password</h5>
 
             </div>
             <div class="modal-body">
-                Enter email address to change password
-                <input type="email" class="form-group col-md-12" name="email" id="email${obj.count}">
+                Enter old password
+                <input type="email" class="form-group col-md-12" name="email" id="password${obj.count}">
+            </div>
+            <div class="modal-body">
+                Enter new password
+                <input type="email" class="form-group col-md-12" name="email" id="password${obj.count}">
+            </div>
+            <div class="modal-body">
+                Confirm new password
+                <input type="email" class="form-group col-md-12" name="email" id="password${obj.count}">
             </div>
             <div class="modal-footer">
-              <button id="saveButton" type="button" onclick="deleteCustomer('${obj.id}');"  class="btn btn-warning" data-dismiss="modal">Reset password</button>
+              <button id="saveButton" type="button" onclick="changepassword('${obj.id}');"  class="btn btn-warning" data-dismiss="modal">Reset password</button>
             </div>
           </div>
         </div>
       </div>
-
-      <!--email body -->
-      <h2> YCOM unifi System </h2>
-      <hr>
-      <p> to change you rpassword please click the following link </p>
-      <a href=""> the damn link </a>
     `;
   });
 

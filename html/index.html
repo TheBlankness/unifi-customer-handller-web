@@ -62,11 +62,9 @@
                   <a href="#" class="ForgetPwd">Forget Password?</a>
               </div>
                <ul id="messages"> 
-            
             </ul>
           </form>
       </div>
-
   </div>
 </div>
 
@@ -77,3 +75,22 @@
 </body>
 
 </html>
+
+ <!-- Modal reset password -->
+ <div class="modal fade" id="password${obj.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Change password</h5>
+
+        </div>
+        <div class="modal-body">
+            Enter email
+            <input type="email" class="form-group col-md-12" name="email" id="password${obj.count}">
+        </div>
+        <div class="modal-footer">
+          <button id="saveButton" type="button" onclick="changepassword('${obj.id}');"  class="btn btn-warning" data-dismiss="modal">Reset password</button>
+        </div>
+      </div>
+    </div>
+  </div>
