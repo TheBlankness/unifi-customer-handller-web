@@ -323,3 +323,17 @@ th{
   border: 1px solid #ffa500;
   color: #000;
 }
+
+
+.tool{
+  margin: 0; 
+  margin-left: 10px;
+  height: 50%;
+  width: auto;
+  padding-top: .7em;
+  padding-bottom: .8em;
+  text-decoration: none;
+  display: inline-block;
+  border: none;
+  background: none;
+}
