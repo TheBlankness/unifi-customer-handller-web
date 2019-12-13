@@ -100,8 +100,7 @@
       <ul class="tool">
         <li class="company">Branch ID: RSSL284</li>
         <li class="company">Partner Code: RSSL284AA</li>
-        <li style="display: inline-block;"><button class="tool"><i class="fas fa-search"></i></button></li>
-
+        <li style="display: inline-block;"><button class="tool" data-toggle="modal" data-target="#filter"><i class="fas fa-search"></i></button></li>
       </ul>
 
       <table class="table table-hover" id="customerTable">
@@ -334,6 +333,161 @@
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">cancel</button>
               <button id="saveButton" type="button" onclick="deleteCustomer('${obj.id}');"  class="btn btn-danger" data-dismiss="modal">delete</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal FILTER -->
+      <div class="modal fade" id="filter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">Find Specific Data</h5>
+            </div>
+            <div class="modal-body">
+
+              <nav>
+                <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                  <a class="nav-item nav-link active" id="filter1-tab" data-toggle="tab" href="#filter1" role="tab" aria-controls="filter1" aria-selected="true">Search</a>
+                  <a class="nav-item nav-link" id="filter2-tab" data-toggle="tab" href="#filter2" role="tab" aria-controls="filter2" aria-selected="false">Monthly</a>
+                  <a class="nav-item nav-link" id="filter3-tab" data-toggle="tab" href="#filter3" role="tab" aria-controls="filter3" aria-selected="false">Annual</a>
+                  <a class="nav-item nav-link" id="filter4-tab" data-toggle="tab" href="#filter4" role="tab" aria-controls="filter4" aria-selected="false">Total</a>
+                </div>
+              </nav>
+              <div class="tab-content" id="nav-tabContent">
+
+                <div class="tab-pane fade show active" id="filter4" role="tabpanel" aria-labelledby="filter4-tab">
+                  <label class="filter"> Enter Search keyword</label>
+                  <button id="totalButton" type="button" onclick=""  class="btn btn-primary" data-dismiss="modal">View All</button>
+                </div>
+
+                <div class="tab-pane fade show active" id="filter1" role="tabpanel" aria-labelledby="filter1-tab">
+                  <label class="filter"> Enter Search keyword</label>
+                  <input type="text" class="form-control" id="" value="" placeholder="search...">
+                </div>
+
+                <div class="tab-pane fade show" id="filter2" role="tabpanel" aria-labelledby="filter2-tab">
+                  <label class="filter" for="state">Select Month</label>
+                      <select id="" class="form-control" >
+                          <option disabled selected value="">--select--</option>
+                  <option value="89">JANURAY</option>
+                  <option value="99">FEBRUARY</option>
+                  <option value="129">MARCH</option>
+                  <option value="159">APRIL</option>
+                  <option value="199">MAY</option>
+                  <option value="139">JUNE</option>
+                  <option value="249">JULY</option>
+                  <option value="349">AUGUST</option>
+                  <option value="349">SEPTEMBER</option>
+                  <option value="349">OCTOBER</option>
+                  <option value="349">NOVEMBER</option>
+                  <option value="349">DECEMBER</option>
+                      </select>
+                </div>
+
+                <div class="tab-pane fade" id="filter3" role="tabpanel" aria-labelledby="filter3-tab">
+                  <div class="wrapper">
+                    <ul class="ks-cboxtags">
+                      <li>
+                        <input type="checkbox" id="checkbox1" value="Rainbow Dash">
+                        <label for="checkbox1">JANUARY</label>
+                      </li>
+                      <li>
+                        <input type="checkbox" id="checkbox2" value="Cotton Candy">
+                        <label for="checkbox2">FEBRUARY</label>
+                      </li>
+                      <li>
+                        <input type="checkbox" id="checkbox3" value="Rarity">
+                        <label for="checkbox3">MARCH</label>
+                      </li>
+                      <li>
+                        <input type="checkbox" id="checkbox4" value="Moondancer">
+                        <label for="checkbox4">APRIL</label>
+                      </li>
+                      <li>
+                        <input type="checkbox" id="checkbox5" value="Surprise">
+                        <label for="checkbox5">MAY</label>
+                      </li>
+                      <li>
+                        <input type="checkbox" id="checkbox6" value="Twilight Sparkle">
+                        <label for="checkbox6">JUNE</label>
+                      </li>
+                      <li>
+                        <input type="checkbox" id="checkbox7" value="Fluttershy">
+                        <label for="checkbox7">JULY</label>
+                      </li>
+                      <li>
+                        <input type="checkbox" id="checkbox8" value="Cotton Candy">
+                        <label for="checkbox8">AUGUST</label>
+                      </li>
+                      <li>
+                        <input type="checkbox" id="checkbox9" value="Rarity">
+                        <label for="checkbox9">SEPTEMBER</label>
+                      </li>
+                      <li>
+                        <input type="checkbox" id="checkbox10" value="Moondancer">
+                        <label for="checkbox10">OCTOBER</label>
+                      </li>
+                      <li>
+                        <input type="checkbox" id="checkbox11" value="Surprise">
+                        <label for="checkbox11">NOVEMBER</label>
+                      </li>
+                      <li>
+                        <input type="checkbox" id="checkbox12" value="Twilight Sparkle">
+                        <label for="checkbox12">DECEMBER</label>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="wrapper">
+                    <ul class="ks-cboxtags">
+                      <li>
+                        <input type="checkbox" id="checkbox2020" value="2020">
+                        <label for="checkbox2020">2020</label>
+                      </li>
+                      <li>
+                        <input type="checkbox" id="checkbox2021" value="2021">
+                        <label for="checkbox2021">2021</label>
+                      </li>
+                      <li>
+                        <input type="checkbox" id="checkbox2022" value="2022">
+                        <label for="checkbox2022">2022</label>
+                      </li>
+                      <li>
+                        <input type="checkbox" id="checkbox2023" value="2023">
+                        <label for="checkbox2023">2023</label>
+                      </li>
+                      <li>
+                        <input type="checkbox" id="checkbox2024" value="2024">
+                        <label for="checkbox2024">2024</label>
+                      </li>
+                      <li>
+                        <input type="checkbox" id="checkbox2025" value="2025">
+                        <label for="checkbox2025">2025</label>
+                      </li>
+                      <li>
+                        <input type="checkbox" id="checkbox2026" value="2026">
+                        <label for="checkbox2026">2026</label>
+                      </li>
+                      <li>
+                        <input type="checkbox" id="checkbox2027" value="2027">
+                        <label for="checkbox2027">2027</label>
+                      </li>
+                      <li>
+                        <input type="checkbox" id="checkbox2028" value="2028">
+                        <label for="checkbox2028">2028</label>
+                      </li>
+                      <li>
+                        <input type="checkbox" id="checkbox2029" value="2029">
+                        <label for="checkbox2029">2029</label>
+                      </li>
+                    </ul>
+                  </div>
+               </div>
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">cancel</button>
+              <button id="saveButton" type="button" onclick="deleteCustomer('${obj.id}');"  class="btn btn-danger" data-dismiss="modal">GO</button>
             </div>
           </div>
         </div>
