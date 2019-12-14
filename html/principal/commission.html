@@ -54,7 +54,7 @@
                     <a class="nav-link navi "  href="order.html">ORDER</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link " id="pilih" href="#">INSTALLATION</a>
+                    <a class="nav-link navi" href="installation.html">INSTALLATION</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link navi" href="account.html">ACCOUNT</a>
@@ -63,7 +63,7 @@
                     <a class="nav-link navi" href="report.html">REPORT</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link navi" href="commission.html">COMMISSION</a>
+                    <a class="nav-link navi" id="pilih" href="#">COMMISSION</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link navi" style="border-radius: 10px;" onclick="logout()" href="#"><i class="fas fa-sign-out-alt"></i></a>
@@ -79,17 +79,12 @@
         <thead>
             <tr>
         <th scope="col">#</th>
-        <th scope="col">Name</th>
-        <th scope="col">IC number</th>
-        <th scope="col">Email</th>
-        <th scope="col">Phone</th>
-        <th scope="col">Address Line 1</th>
-        <th scope="col">Address Line 2</th>
-        <th scope="col">City</th>
-        <th scope="col">State</th>
-        <th scope="col">ZipCode</th>
+        <th scope="col">Customer</th>
         <th scope="col">Package</th>
-       
+        <th scope="col">Agent</th>
+        <th scope="col">Agent Phone</th>
+        <th scope="col">Commission</th>
+        <th scope="col">Paid Status</th>
       </tr>
     </thead>
     <tbody>
@@ -101,40 +96,8 @@
         <td>658798451</td>        
         <td>3, 57th street</td>
         <td>eastern gulag</td>
-        <td>ruski</td>
-        <td>stalingrad</td>        
-        <td>45668</td>
-        <td>Unifi home:: RM99/month</td>
+      </tr>
 
-      </tr>
-      <tr>
-        <td>1</td>        
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
-        <td>1</td>        
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
-        <td>1</td>        
-        <td>Mark</td>
-        <td>Otto</td>
-    
-      </tr>
-      <tr>
-        <td>1</td>        
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
-        <td>1</td>        
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
-        <td>1</td>        
-        <td>Mark</td>
-        <td>Otto</td>
-
-      </tr>
     </tbody>
   </table>
   
@@ -212,12 +175,10 @@ function loadTable(json){
       <td>${obj.email}</td>
       <td>${obj.phone}</td>
       <td>${obj.address1}</td>
-      <td>${obj.address2}</td>
-      <td>${obj.city}</td>
-      <td>${obj.state}</td>
-      <td>${obj.zip}</td>
-      <td>${obj.package}</td>
-  
+      <td  style="padding: 0;"> <label class="switch">
+  <input type="checkbox">
+  <span class="slider round"></span>
+</label> </td> 
       `;
   });
 
